@@ -1,3 +1,6 @@
+// mod common;
+// use common::*;
+
 fn main() {
     unsafe {
         let entry = ash_rewrite::Entry::load().unwrap();

@@ -51,6 +51,10 @@ pub(crate) fn escape_ident(name: &str) -> Ident {
     syn::parse_str(name).unwrap_or_else(|_| format_ident!("_{name}"))
 }
 
+pub(crate) fn trim_p_pps(name: &str) -> &str {
+    name.trim_start_matches("p_").trim_start_matches("pp_")
+}
+
 #[derive(Debug)]
 pub struct Context<'a>(&'a AnalysisResult);
 
@@ -65,6 +69,10 @@ impl<'a> Deref for Context<'a> {
 impl<'a> RustTranslator for Context<'a> {
     fn var_name_to_rust(&self, name: VariableName) -> Ident {
         crate::escape_ident(&name.original().to_snek_case())
+    }
+
+    fn trimmed_var_name_to_rust(&self, name: VariableName) -> Ident {
+        crate::escape_ident(crate::trim_p_pps(&name.original().to_snek_case()))
     }
 
     fn type_to_rust(&self, name: TypeName, qualified: bool, lifetime: &Lifetime) -> TokenStream {
