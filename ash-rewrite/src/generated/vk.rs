@@ -478,3 +478,4 @@ pub use super::video::codecs_common::*;
 pub use crate::Handle;
 pub use crate::TaggedStructure;
 pub use crate::Extends;
+pub use crate::platform_types::*;

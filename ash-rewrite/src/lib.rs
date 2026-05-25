@@ -16,10 +16,13 @@ mod instance;
 mod generated;
 /// Type definitions for platform-specific external types
 pub mod platform_types;
+pub use platform_types::*;
 
 use alloc::vec::Vec;
 use core::{mem, ptr};
 pub use generated::*;
+mod extensions;
+
 
 #[allow(clippy::wrong_self_convention)]
 pub trait Handle: Sized {
