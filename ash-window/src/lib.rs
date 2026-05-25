@@ -2,7 +2,7 @@
 
 use std::os::raw::c_char;
 
-use ash::{
+use ash_rewrite::{
     ext::metal_surface,
     khr::{android_surface, surface, wayland_surface, win32_surface, xcb_surface, xlib_surface},
     vk, Entry, Instance, VkResult,

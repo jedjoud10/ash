@@ -2627,7 +2627,7 @@ pub(crate) mod reexport {
         }
     }
     impl<'a> ApplicationInfo<'a> {
-        pub fn p_application_name(
+        pub fn application_name(
             mut self,
             application_name: &'a core::ffi::CStr,
         ) -> Self {
@@ -2645,7 +2645,7 @@ pub(crate) mod reexport {
             self.application_version = application_version;
             self
         }
-        pub fn p_engine_name(mut self, engine_name: &'a core::ffi::CStr) -> Self {
+        pub fn engine_name(mut self, engine_name: &'a core::ffi::CStr) -> Self {
             self.p_engine_name = engine_name.as_ptr();
             self
         }
@@ -4774,7 +4774,7 @@ pub(crate) mod reexport {
             self.module = module;
             self
         }
-        pub fn p_name(mut self, name: &'a core::ffi::CStr) -> Self {
+        pub fn name(mut self, name: &'a core::ffi::CStr) -> Self {
             self.p_name = name.as_ptr();
             self
         }

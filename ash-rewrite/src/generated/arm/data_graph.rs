@@ -452,7 +452,7 @@ pub(crate) mod reexport {
         }
     }
     impl<'a> DataGraphPipelineCompilerControlCreateInfoARM<'a> {
-        pub fn p_vendor_options(mut self, vendor_options: &'a core::ffi::CStr) -> Self {
+        pub fn vendor_options(mut self, vendor_options: &'a core::ffi::CStr) -> Self {
             self.p_vendor_options = vendor_options.as_ptr();
             self
         }
@@ -550,7 +550,7 @@ pub(crate) mod reexport {
             self.module = module;
             self
         }
-        pub fn p_name(mut self, name: &'a core::ffi::CStr) -> Self {
+        pub fn name(mut self, name: &'a core::ffi::CStr) -> Self {
             self.p_name = name.as_ptr();
             self
         }

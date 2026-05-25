@@ -7,7 +7,7 @@ edition = "2024"
 image = { version = "0.25", default-features = false, features = ["png"] }
 winit = { version = "0.29", features = ["rwh_06"] }
 
-ash-rewrite = {  path = "../ash-rewrite" } # default-features = false, features = ["linked", "debug", "std", "provisional"]
+ash-rewrite = {  path = "../ash-rewrite", features = ["linked"]  } # default-features = false, features = ["linked", "debug", "std", "provisional"]
 
 # TODO: how would ash-window differentiate from the rewritten version and the old version? feature flag perhaps?
 ash-window = { path = "../ash-window" }

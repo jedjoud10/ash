@@ -180,7 +180,7 @@ pub(crate) mod reexport {
             self.module = module;
             self
         }
-        pub fn p_name(mut self, name: &'a core::ffi::CStr) -> Self {
+        pub fn name(mut self, name: &'a core::ffi::CStr) -> Self {
             self.p_name = name.as_ptr();
             self
         }

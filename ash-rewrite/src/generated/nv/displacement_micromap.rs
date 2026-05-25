@@ -210,14 +210,6 @@ impl<'a> AccelerationStructureTrianglesDisplacementMicromapNV<'a> {
         self.p_usage_counts = usage_counts.as_ptr();
         self
     }
-    pub fn usage_counts(
-        mut self,
-        usage_counts: &'a [&'a crate::vk::MicromapUsageEXT],
-    ) -> Self {
-        self.usage_counts_count = usage_counts.len() as _;
-        self.pp_usage_counts = usage_counts.as_ptr().cast();
-        self
-    }
     pub fn micromap(mut self, micromap: crate::vk::MicromapEXT) -> Self {
         self.micromap = micromap;
         self

@@ -48,7 +48,7 @@ pub struct LayerSettingEXT<'a> {
     pub _marker: ::core::marker::PhantomData<&'a ()>,
 }
 impl<'a> LayerSettingEXT<'a> {
-    pub fn p_layer_name(mut self, layer_name: &'a core::ffi::CStr) -> Self {
+    pub fn layer_name(mut self, layer_name: &'a core::ffi::CStr) -> Self {
         self.p_layer_name = layer_name.as_ptr();
         self
     }
@@ -59,7 +59,7 @@ impl<'a> LayerSettingEXT<'a> {
             Some(unsafe { core::ffi::CStr::from_ptr(self.p_layer_name) })
         }
     }
-    pub fn p_setting_name(mut self, setting_name: &'a core::ffi::CStr) -> Self {
+    pub fn setting_name(mut self, setting_name: &'a core::ffi::CStr) -> Self {
         self.p_setting_name = setting_name.as_ptr();
         self
     }

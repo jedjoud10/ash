@@ -203,6 +203,12 @@ fn decl_setter_and_getter(
     ctx: &Context<'_>,
     lifetime: &Lifetime,
 ) -> TokenStream {
+    // HACK(jedjoud) very evil hack to just get generated crate to compile (got tired of manually commenting duplicate fns)
+    // definitely needs fixing 
+    if decl.name.original() == "ppGeometries" || decl.name.original() == "ppUsageCounts" {
+        return quote ! {}
+    }
+
     let field_name = ctx.var_name_to_rust(decl.name);
     let trimmed_field_name = ctx.trimmed_var_name_to_rust(decl.name);   
 
@@ -222,7 +228,7 @@ fn decl_setter_and_getter(
             let trimmed_field_name_as_cstr = format_ident!("{trimmed_field_name}_as_c_str");
             
             quote! {
-                pub fn #field_name(mut self, #trimmed_field_name: #ty) -> Self {
+                pub fn #trimmed_field_name(mut self, #trimmed_field_name: #ty) -> Self {
                     self.#field_name = #trimmed_field_name.as_ptr();
                     self
                 }

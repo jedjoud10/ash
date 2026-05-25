@@ -246,7 +246,7 @@ pub(crate) mod reexport {
             self.object_handle = object_handle;
             self
         }
-        pub fn p_object_name(mut self, object_name: &'a core::ffi::CStr) -> Self {
+        pub fn object_name(mut self, object_name: &'a core::ffi::CStr) -> Self {
             self.p_object_name = object_name.as_ptr();
             self
         }
@@ -334,7 +334,7 @@ pub(crate) mod reexport {
         }
     }
     impl<'a> DebugUtilsLabelEXT<'a> {
-        pub fn p_label_name(mut self, label_name: &'a core::ffi::CStr) -> Self {
+        pub fn label_name(mut self, label_name: &'a core::ffi::CStr) -> Self {
             self.p_label_name = label_name.as_ptr();
             self
         }
@@ -463,10 +463,7 @@ pub(crate) mod reexport {
             self.flags = flags;
             self
         }
-        pub fn p_message_id_name(
-            mut self,
-            message_id_name: &'a core::ffi::CStr,
-        ) -> Self {
+        pub fn message_id_name(mut self, message_id_name: &'a core::ffi::CStr) -> Self {
             self.p_message_id_name = message_id_name.as_ptr();
             self
         }
@@ -481,7 +478,7 @@ pub(crate) mod reexport {
             self.message_id_number = message_id_number;
             self
         }
-        pub fn p_message(mut self, message: &'a core::ffi::CStr) -> Self {
+        pub fn message(mut self, message: &'a core::ffi::CStr) -> Self {
             self.p_message = message.as_ptr();
             self
         }

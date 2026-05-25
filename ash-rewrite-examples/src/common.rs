@@ -73,7 +73,7 @@ pub fn record_submit_commandbuffer<F: FnOnce(&Device, vk::CommandBuffer)>(
         let command_buffers = vec![command_buffer];
 
         let submit_info = vk::SubmitInfo::default()
-            .p_wait_semaphores(wait_semaphores)
+            .wait_semaphores(wait_semaphores)
             .wait_dst_stage_mask(wait_mask)
             .command_buffers(&command_buffers)
             .signal_semaphores(signal_semaphores);
@@ -105,9 +105,12 @@ unsafe extern "system" fn vulkan_debug_callback(
         ffi::CStr::from_ptr(callback_data.p_message).to_string_lossy()
     };
 
+    // TODO: generator needs to impl Debug trait
+    /*
     println!(
         "{message_severity:?}:\n{message_type:?} [{message_id_name} ({message_id_number})] : {message}\n",
     );
+    */
 
     vk::FALSE
 }
@@ -277,8 +280,8 @@ impl ExampleBase {
                     vk::DebugUtilsMessageTypeFlagsEXT::GENERAL
                         | vk::DebugUtilsMessageTypeFlagsEXT::VALIDATION
                         | vk::DebugUtilsMessageTypeFlagsEXT::PERFORMANCE,
-                )
-                .pfn_user_callback(Some(vulkan_debug_callback));
+                );
+                //.pfn_user_callback(Some(vulkan_debug_callback));
 
             let debug_utils_loader = debug_utils::Instance::load(&entry, &instance);
             let debug_call_back = debug_utils_loader
