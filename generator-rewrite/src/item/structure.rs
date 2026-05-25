@@ -203,12 +203,6 @@ fn decl_setter_and_getter(
     ctx: &Context<'_>,
     lifetime: &Lifetime,
 ) -> TokenStream {
-    // HACK(jedjoud) very evil hack to just get generated crate to compile (got tired of manually commenting duplicate fns)
-    // definitely needs fixing 
-    if decl.name.original() == "ppGeometries" || decl.name.original() == "ppUsageCounts" {
-        return quote ! {}
-    }
-
     let field_name = ctx.var_name_to_rust(decl.name);
     let trimmed_field_name = ctx.trimmed_var_name_to_rust(decl.name);   
 
@@ -252,7 +246,7 @@ fn decl_setter_and_getter(
                 }
 
                 pub fn #trimmed_field_name_as_cstr(&self) -> core::result::Result<&core::ffi::CStr, core::ffi::FromBytesUntilNulError> {
-                    crate::wrap_c_str_slice_until_nul(&self.#trimmed_field_name)
+                    crate::wrap_c_str_slice_until_nul(&self.#field_name)
                 }
             }
         }
@@ -268,7 +262,7 @@ fn decl_setter_and_getter(
                 }
 
                 pub fn #trimmed_field_name_as_slice(&self) -> &[#base_ty] {
-                    &self.#trimmed_field_name[..self.#len_var as _]
+                    &self.#field_name[..self.#len_var as _]
                 }
             }
         }

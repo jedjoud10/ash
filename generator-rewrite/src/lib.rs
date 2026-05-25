@@ -51,8 +51,14 @@ pub(crate) fn escape_ident(name: &str) -> Ident {
     syn::parse_str(name).unwrap_or_else(|_| format_ident!("_{name}"))
 }
 
-pub(crate) fn trim_p_pps(name: &str) -> &str {
-    name.trim_start_matches("p_").trim_start_matches("pp_")
+pub(crate) fn trim_p_pps(name: &str) -> String {
+    let trimmed = name.trim_start_matches("p_").trim_start_matches("pp_");
+
+    if (name == "pp_usage_counts" || name == "pp_geometries") {
+        format!("{}_ptrs", trimmed)
+    } else {
+        trimmed.to_string()
+    }
 }
 
 #[derive(Debug)]
@@ -72,7 +78,7 @@ impl<'a> RustTranslator for Context<'a> {
     }
 
     fn trimmed_var_name_to_rust(&self, name: VariableName) -> Ident {
-        crate::escape_ident(crate::trim_p_pps(&name.original().to_snek_case()))
+        crate::escape_ident(&crate::trim_p_pps(&name.original().to_snek_case()))
     }
 
     fn type_to_rust(&self, name: TypeName, qualified: bool, lifetime: &Lifetime) -> TokenStream {

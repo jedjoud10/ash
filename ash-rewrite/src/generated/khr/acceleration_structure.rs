@@ -785,6 +785,14 @@ pub(crate) mod reexport {
             self.p_geometries = geometries.as_ptr();
             self
         }
+        pub fn geometries_ptrs(
+            mut self,
+            geometries_ptrs: &'a [&'a crate::vk::AccelerationStructureGeometryKHR<'a>],
+        ) -> Self {
+            self.geometry_count = geometries_ptrs.len() as _;
+            self.pp_geometries = geometries_ptrs.as_ptr().cast();
+            self
+        }
         pub fn scratch_data(
             mut self,
             scratch_data: crate::vk::DeviceOrHostAddressKHR,
