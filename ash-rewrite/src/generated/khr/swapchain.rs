@@ -246,8 +246,8 @@ pub(crate) mod reexport {
         pub image_sharing_mode: crate::vk::SharingMode,
         pub queue_family_index_count: u32,
         pub p_queue_family_indices: *const u32,
-        pub pre_transform: crate::vk::SurfaceTransformFlagBitsKHR,
-        pub composite_alpha: crate::vk::CompositeAlphaFlagBitsKHR,
+        pub pre_transform: crate::vk::SurfaceTransformFlagsKHR,
+        pub composite_alpha: crate::vk::CompositeAlphaFlagsKHR,
         pub present_mode: crate::vk::PresentModeKHR,
         pub clipped: crate::vk::Bool32,
         pub old_swapchain: crate::vk::SwapchainKHR,
@@ -338,14 +338,14 @@ pub(crate) mod reexport {
         }
         pub fn pre_transform(
             mut self,
-            pre_transform: crate::vk::SurfaceTransformFlagBitsKHR,
+            pre_transform: crate::vk::SurfaceTransformFlagsKHR,
         ) -> Self {
             self.pre_transform = pre_transform;
             self
         }
         pub fn composite_alpha(
             mut self,
-            composite_alpha: crate::vk::CompositeAlphaFlagBitsKHR,
+            composite_alpha: crate::vk::CompositeAlphaFlagsKHR,
         ) -> Self {
             self.composite_alpha = composite_alpha;
             self
@@ -589,7 +589,7 @@ pub(crate) mod reexport {
         pub p_next: *const core::ffi::c_void,
         pub swapchain_count: u32,
         pub p_device_masks: *const u32,
-        pub mode: crate::vk::DeviceGroupPresentModeFlagBitsKHR,
+        pub mode: crate::vk::DeviceGroupPresentModeFlagsKHR,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for DeviceGroupPresentInfoKHR<'a> {
@@ -619,10 +619,7 @@ pub(crate) mod reexport {
             self.p_device_masks = device_masks.as_ptr();
             self
         }
-        pub fn mode(
-            mut self,
-            mode: crate::vk::DeviceGroupPresentModeFlagBitsKHR,
-        ) -> Self {
+        pub fn mode(mut self, mode: crate::vk::DeviceGroupPresentModeFlagsKHR) -> Self {
             self.mode = mode;
             self
         }

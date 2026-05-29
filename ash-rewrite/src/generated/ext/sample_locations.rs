@@ -75,7 +75,7 @@ impl InstanceFn {
             get_physical_device_multisample_properties_ext: unsafe {
                 unsafe extern "system" fn get_physical_device_multisample_properties_ext(
                     _: crate::vk::PhysicalDevice,
-                    _: crate::vk::SampleCountFlagBits,
+                    _: crate::vk::SampleCountFlags,
                     _: *mut crate::vk::MultisamplePropertiesEXT<'_>,
                 ) {
                     panic!("unable to load vkGetPhysicalDeviceMultisamplePropertiesEXT")
@@ -134,7 +134,7 @@ pub(crate) mod reexport {
     pub struct SampleLocationsInfoEXT<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub sample_locations_per_pixel: crate::vk::SampleCountFlagBits,
+        pub sample_locations_per_pixel: crate::vk::SampleCountFlags,
         pub sample_location_grid_size: crate::vk::Extent2D,
         pub sample_locations_count: u32,
         pub p_sample_locations: *const crate::vk::SampleLocationEXT,
@@ -163,7 +163,7 @@ pub(crate) mod reexport {
     impl<'a> SampleLocationsInfoEXT<'a> {
         pub fn sample_locations_per_pixel(
             mut self,
-            sample_locations_per_pixel: crate::vk::SampleCountFlagBits,
+            sample_locations_per_pixel: crate::vk::SampleCountFlags,
         ) -> Self {
             self.sample_locations_per_pixel = sample_locations_per_pixel;
             self
@@ -464,7 +464,7 @@ pub(crate) mod reexport {
     );
     pub type PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT = unsafe extern "system" fn(
         physical_device: crate::vk::PhysicalDevice,
-        samples: crate::vk::SampleCountFlagBits,
+        samples: crate::vk::SampleCountFlags,
         p_multisample_properties: *mut crate::vk::MultisamplePropertiesEXT<'_>,
     );
     pub const EXT_SAMPLE_LOCATIONS_SPEC_VERSION: u32 = 1;

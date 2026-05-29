@@ -80,7 +80,7 @@ pub(crate) mod reexport {
         pub p_next: *const core::ffi::c_void,
         pub semaphore: crate::vk::Semaphore,
         pub flags: crate::vk::SemaphoreImportFlags,
-        pub handle_type: crate::vk::ExternalSemaphoreHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalSemaphoreHandleTypeFlags,
         pub zircon_handle: crate::platform_types::zx_handle_t,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
@@ -112,7 +112,7 @@ pub(crate) mod reexport {
         }
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalSemaphoreHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalSemaphoreHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -131,7 +131,7 @@ pub(crate) mod reexport {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
         pub semaphore: crate::vk::Semaphore,
-        pub handle_type: crate::vk::ExternalSemaphoreHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalSemaphoreHandleTypeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a>
@@ -156,7 +156,7 @@ pub(crate) mod reexport {
         }
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalSemaphoreHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalSemaphoreHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self

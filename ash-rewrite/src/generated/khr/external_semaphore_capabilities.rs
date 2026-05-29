@@ -71,8 +71,8 @@ pub(crate) mod reexport {
         pub const PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO_KHR: Self = Self::PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO;
         pub const EXTERNAL_SEMAPHORE_PROPERTIES_KHR: Self = Self::EXTERNAL_SEMAPHORE_PROPERTIES;
     }
-    pub type ExternalSemaphoreHandleTypeFlagBitsKHR = crate::vk::ExternalSemaphoreHandleTypeFlagBits;
-    pub type ExternalSemaphoreFeatureFlagBitsKHR = crate::vk::ExternalSemaphoreFeatureFlagBits;
+    pub type ExternalSemaphoreHandleTypeFlagsKHR = crate::vk::ExternalSemaphoreHandleTypeFlags;
+    pub type ExternalSemaphoreFeatureFlagsKHR = crate::vk::ExternalSemaphoreFeatureFlags;
     ///Provided by [`khr::external_semaphore_capabilities`](crate::khr::external_semaphore_capabilities)
     impl crate::vk::ExternalSemaphoreHandleTypeFlagBits {
         pub const OPAQUE_FD_KHR: Self = Self::OPAQUE_FD;

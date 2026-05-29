@@ -36,7 +36,7 @@ impl DeviceFn {
             get_memory_metal_handle_properties_ext: unsafe {
                 unsafe extern "system" fn get_memory_metal_handle_properties_ext(
                     _: crate::vk::Device,
-                    _: crate::vk::ExternalMemoryHandleTypeFlagBits,
+                    _: crate::vk::ExternalMemoryHandleTypeFlags,
                     _: *const core::ffi::c_void,
                     _: *mut crate::vk::MemoryMetalHandlePropertiesEXT<'_>,
                 ) -> crate::vk::Result {
@@ -80,7 +80,7 @@ pub(crate) mod reexport {
     pub struct ImportMemoryMetalHandleInfoEXT<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         pub handle: *mut core::ffi::c_void,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
@@ -103,7 +103,7 @@ pub(crate) mod reexport {
     impl<'a> ImportMemoryMetalHandleInfoEXT<'a> {
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -146,7 +146,7 @@ pub(crate) mod reexport {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
         pub memory: crate::vk::DeviceMemory,
-        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for MemoryGetMetalHandleInfoEXT<'a> {
@@ -170,7 +170,7 @@ pub(crate) mod reexport {
         }
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -195,7 +195,7 @@ pub(crate) mod reexport {
     ) -> crate::vk::Result;
     pub type PFN_vkGetMemoryMetalHandlePropertiesEXT = unsafe extern "system" fn(
         device: crate::vk::Device,
-        handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+        handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         p_handle: *const core::ffi::c_void,
         p_memory_metal_handle_properties: *mut crate::vk::MemoryMetalHandlePropertiesEXT<
             '_,

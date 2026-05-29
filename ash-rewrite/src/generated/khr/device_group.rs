@@ -120,8 +120,8 @@ pub(crate) mod reexport {
         pub const BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO_KHR: Self = Self::BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO;
         pub const BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO_KHR: Self = Self::BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO;
     }
-    pub type PeerMemoryFeatureFlagBitsKHR = crate::vk::PeerMemoryFeatureFlagBits;
-    pub type MemoryAllocateFlagBitsKHR = crate::vk::MemoryAllocateFlagBits;
+    pub type PeerMemoryFeatureFlagsKHR = crate::vk::PeerMemoryFeatureFlags;
+    pub type MemoryAllocateFlagsKHR = crate::vk::MemoryAllocateFlags;
     ///Provided by [`khr::device_group`](crate::khr::device_group)
     impl crate::vk::ImageCreateFlagBits {
         pub const SPLIT_INSTANCE_BIND_REGIONS_KHR: Self = Self::SPLIT_INSTANCE_BIND_REGIONS;

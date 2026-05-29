@@ -6,7 +6,7 @@ pub type ExportSemaphoreCreateInfoKHR<'a> = crate::vk::ExportSemaphoreCreateInfo
 impl crate::vk::StructureType {
     pub const EXPORT_SEMAPHORE_CREATE_INFO_KHR: Self = Self::EXPORT_SEMAPHORE_CREATE_INFO;
 }
-pub type SemaphoreImportFlagBitsKHR = crate::vk::SemaphoreImportFlagBits;
+pub type SemaphoreImportFlagsKHR = crate::vk::SemaphoreImportFlags;
 ///Provided by [`khr::external_semaphore`](crate::khr::external_semaphore)
 impl crate::vk::SemaphoreImportFlagBits {
     pub const TEMPORARY_KHR: Self = Self::TEMPORARY;

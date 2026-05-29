@@ -17,7 +17,7 @@ impl Code for BitMask {
     #[instrument(skip(ctx))]
     fn code(&self, ctx: &Context) -> CodeMap {
         trace!("generating");
-        let name = ctx.type_to_rust(self.name(), false, &Lifetime::placeholder());
+        let name = ctx.type_to_rust2(self.name(), false, &Lifetime::placeholder());
         let base_ty = match self.bitwidth {
             BitWidth::Bits32 => quote! { u32 },
             BitWidth::Bits64 => quote! { u64 },
@@ -26,7 +26,7 @@ impl Code for BitMask {
         let mut bits_code = TokenStream::default();
         let mut values = TokenStream::default();
         if let Some(bits_name) = self.bits_name {
-            let bits_name_tokens = ctx.type_to_rust(bits_name, false, &Lifetime::placeholder());
+            let bits_name_tokens = ctx.type_to_rust2(bits_name, false, &Lifetime::placeholder());
 
             bits_code = quote! {
                 #[repr(transparent)]
@@ -163,7 +163,7 @@ impl Code for BitMask {
             }
 
             for (&dest, impl_tokens) in impl_map.iter() {
-                let name = ctx.type_to_rust(
+                let name = ctx.type_to_rust2(
                     bits_name,
                     dest != Destination::new(self.required_by),
                     &Lifetime::placeholder(),

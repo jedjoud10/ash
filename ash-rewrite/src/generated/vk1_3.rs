@@ -780,7 +780,7 @@ pub(crate) mod reexport {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
         pub p_create_info: *const crate::vk::ImageCreateInfo<'a>,
-        pub plane_aspect: crate::vk::ImageAspectFlagBits,
+        pub plane_aspect: crate::vk::ImageAspectFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for DeviceImageMemoryRequirements<'a> {
@@ -807,7 +807,7 @@ pub(crate) mod reexport {
         }
         pub fn plane_aspect(
             mut self,
-            plane_aspect: crate::vk::ImageAspectFlagBits,
+            plane_aspect: crate::vk::ImageAspectFlags,
         ) -> Self {
             self.plane_aspect = plane_aspect;
             self
@@ -3940,7 +3940,7 @@ pub(crate) mod reexport {
         pub p_next: *const core::ffi::c_void,
         pub image_view: crate::vk::ImageView,
         pub image_layout: crate::vk::ImageLayout,
-        pub resolve_mode: crate::vk::ResolveModeFlagBits,
+        pub resolve_mode: crate::vk::ResolveModeFlags,
         pub resolve_image_view: crate::vk::ImageView,
         pub resolve_image_layout: crate::vk::ImageLayout,
         pub load_op: crate::vk::AttachmentLoadOp,
@@ -3979,7 +3979,7 @@ pub(crate) mod reexport {
         }
         pub fn resolve_mode(
             mut self,
-            resolve_mode: crate::vk::ResolveModeFlagBits,
+            resolve_mode: crate::vk::ResolveModeFlags,
         ) -> Self {
             self.resolve_mode = resolve_mode;
             self
@@ -4054,7 +4054,7 @@ pub(crate) mod reexport {
         pub p_color_attachment_formats: *const crate::vk::Format,
         pub depth_attachment_format: crate::vk::Format,
         pub stencil_attachment_format: crate::vk::Format,
-        pub rasterization_samples: crate::vk::SampleCountFlagBits,
+        pub rasterization_samples: crate::vk::SampleCountFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a>
@@ -4116,7 +4116,7 @@ pub(crate) mod reexport {
         }
         pub fn rasterization_samples(
             mut self,
-            rasterization_samples: crate::vk::SampleCountFlagBits,
+            rasterization_samples: crate::vk::SampleCountFlags,
         ) -> Self {
             self.rasterization_samples = rasterization_samples;
             self

@@ -7,7 +7,7 @@ pub struct VideoDecodeH264ProfileInfoKHR<'a> {
     pub s_type: crate::vk::StructureType,
     pub p_next: *const core::ffi::c_void,
     pub std_profile_idc: crate::vk::H264ProfileIdc,
-    pub picture_layout: crate::vk::VideoDecodeH264PictureLayoutFlagBitsKHR,
+    pub picture_layout: crate::vk::VideoDecodeH264PictureLayoutFlagsKHR,
     pub _marker: ::core::marker::PhantomData<&'a ()>,
 }
 unsafe impl<'a> crate::TaggedStructure<'a> for VideoDecodeH264ProfileInfoKHR<'a> {
@@ -38,7 +38,7 @@ impl<'a> VideoDecodeH264ProfileInfoKHR<'a> {
     }
     pub fn picture_layout(
         mut self,
-        picture_layout: crate::vk::VideoDecodeH264PictureLayoutFlagBitsKHR,
+        picture_layout: crate::vk::VideoDecodeH264PictureLayoutFlagsKHR,
     ) -> Self {
         self.picture_layout = picture_layout;
         self

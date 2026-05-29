@@ -484,7 +484,7 @@ pub(crate) mod reexport {
     pub struct VideoProfileInfoKHR<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub video_codec_operation: crate::vk::VideoCodecOperationFlagBitsKHR,
+        pub video_codec_operation: crate::vk::VideoCodecOperationFlagsKHR,
         pub chroma_subsampling: crate::vk::VideoChromaSubsamplingFlagsKHR,
         pub luma_bit_depth: crate::vk::VideoComponentBitDepthFlagsKHR,
         pub chroma_bit_depth: crate::vk::VideoComponentBitDepthFlagsKHR,
@@ -511,7 +511,7 @@ pub(crate) mod reexport {
     impl<'a> VideoProfileInfoKHR<'a> {
         pub fn video_codec_operation(
             mut self,
-            video_codec_operation: crate::vk::VideoCodecOperationFlagBitsKHR,
+            video_codec_operation: crate::vk::VideoCodecOperationFlagsKHR,
         ) -> Self {
             self.video_codec_operation = video_codec_operation;
             self

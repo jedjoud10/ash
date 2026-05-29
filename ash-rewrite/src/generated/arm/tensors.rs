@@ -1228,7 +1228,7 @@ pub(crate) mod reexport {
         pub p_next: *const core::ffi::c_void,
         pub flags: crate::vk::TensorCreateFlagsARM,
         pub p_description: *const crate::vk::TensorDescriptionARM<'a>,
-        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a>
@@ -1261,7 +1261,7 @@ pub(crate) mod reexport {
         }
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self

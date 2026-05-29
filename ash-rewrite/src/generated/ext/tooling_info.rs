@@ -65,7 +65,7 @@ pub(crate) mod reexport {
     impl crate::vk::StructureType {
         pub const PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT: Self = Self::PHYSICAL_DEVICE_TOOL_PROPERTIES;
     }
-    pub type ToolPurposeFlagBitsEXT = crate::vk::ToolPurposeFlagBits;
+    pub type ToolPurposeFlagsEXT = crate::vk::ToolPurposeFlags;
     ///Provided by [`ext::tooling_info`](crate::ext::tooling_info)
     impl crate::vk::ToolPurposeFlagBits {
         pub const VALIDATION_EXT: Self = Self::VALIDATION;

@@ -143,8 +143,8 @@ pub(crate) mod reexport {
         pub const PIPELINE_CREATE_FLAGS_2_CREATE_INFO_KHR: Self = Self::PIPELINE_CREATE_FLAGS_2_CREATE_INFO;
         pub const BUFFER_USAGE_FLAGS_2_CREATE_INFO_KHR: Self = Self::BUFFER_USAGE_FLAGS_2_CREATE_INFO;
     }
-    pub type PipelineCreateFlagBits2KHR = crate::vk::PipelineCreateFlagBits2;
-    pub type BufferUsageFlagBits2KHR = crate::vk::BufferUsageFlagBits2;
+    pub type PipelineCreateFlags2KHR = crate::vk::PipelineCreateFlags2;
+    pub type BufferUsageFlags2KHR = crate::vk::BufferUsageFlags2;
     ///Provided by [`khr::maintenance5`](crate::khr::maintenance5)
     impl crate::vk::PipelineCreateFlagBits2 {
         pub const DISABLE_OPTIMIZATION_KHR: Self = Self::DISABLE_OPTIMIZATION;

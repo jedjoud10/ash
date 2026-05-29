@@ -73,7 +73,7 @@ impl DeviceFn {
                 unsafe extern "system" fn cmd_bind_shaders_ext(
                     _: crate::vk::CommandBuffer,
                     _: u32,
-                    _: *const crate::vk::ShaderStageFlagBits,
+                    _: *const crate::vk::ShaderStageFlags,
                     _: *const crate::vk::ShaderEXT,
                 ) {
                     panic!("unable to load vkCmdBindShadersEXT")
@@ -203,7 +203,7 @@ pub(crate) mod reexport {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
         pub flags: crate::vk::ShaderCreateFlagsEXT,
-        pub stage: crate::vk::ShaderStageFlagBits,
+        pub stage: crate::vk::ShaderStageFlags,
         pub next_stage: crate::vk::ShaderStageFlags,
         pub code_type: crate::vk::ShaderCodeTypeEXT,
         pub code_size: usize,
@@ -245,7 +245,7 @@ pub(crate) mod reexport {
             self.flags = flags;
             self
         }
-        pub fn stage(mut self, stage: crate::vk::ShaderStageFlagBits) -> Self {
+        pub fn stage(mut self, stage: crate::vk::ShaderStageFlags) -> Self {
             self.stage = stage;
             self
         }
@@ -509,7 +509,7 @@ pub(crate) mod reexport {
     pub type PFN_vkCmdBindShadersEXT = unsafe extern "system" fn(
         command_buffer: crate::vk::CommandBuffer,
         stage_count: u32,
-        p_stages: *const crate::vk::ShaderStageFlagBits,
+        p_stages: *const crate::vk::ShaderStageFlags,
         p_shaders: *const crate::vk::ShaderEXT,
     );
     pub type PFN_vkCmdSetDepthClampRangeEXT = unsafe extern "system" fn(

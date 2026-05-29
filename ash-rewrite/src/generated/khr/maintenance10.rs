@@ -197,8 +197,8 @@ pub(crate) mod reexport {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
         pub flags: crate::vk::ResolveImageFlagsKHR,
-        pub resolve_mode: crate::vk::ResolveModeFlagBits,
-        pub stencil_resolve_mode: crate::vk::ResolveModeFlagBits,
+        pub resolve_mode: crate::vk::ResolveModeFlags,
+        pub stencil_resolve_mode: crate::vk::ResolveModeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for ResolveImageModeInfoKHR<'a> {
@@ -225,14 +225,14 @@ pub(crate) mod reexport {
         }
         pub fn resolve_mode(
             mut self,
-            resolve_mode: crate::vk::ResolveModeFlagBits,
+            resolve_mode: crate::vk::ResolveModeFlags,
         ) -> Self {
             self.resolve_mode = resolve_mode;
             self
         }
         pub fn stencil_resolve_mode(
             mut self,
-            stencil_resolve_mode: crate::vk::ResolveModeFlagBits,
+            stencil_resolve_mode: crate::vk::ResolveModeFlags,
         ) -> Self {
             self.stencil_resolve_mode = stencil_resolve_mode;
             self

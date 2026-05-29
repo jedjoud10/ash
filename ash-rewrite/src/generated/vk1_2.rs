@@ -1332,7 +1332,7 @@ pub(crate) mod reexport {
         pub p_next: *const core::ffi::c_void,
         pub flags: crate::vk::AttachmentDescriptionFlags,
         pub format: crate::vk::Format,
-        pub samples: crate::vk::SampleCountFlagBits,
+        pub samples: crate::vk::SampleCountFlags,
         pub load_op: crate::vk::AttachmentLoadOp,
         pub store_op: crate::vk::AttachmentStoreOp,
         pub stencil_load_op: crate::vk::AttachmentLoadOp,
@@ -1371,7 +1371,7 @@ pub(crate) mod reexport {
             self.format = format;
             self
         }
-        pub fn samples(mut self, samples: crate::vk::SampleCountFlagBits) -> Self {
+        pub fn samples(mut self, samples: crate::vk::SampleCountFlags) -> Self {
             self.samples = samples;
             self
         }
@@ -2236,8 +2236,8 @@ pub(crate) mod reexport {
     pub struct SubpassDescriptionDepthStencilResolve<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub depth_resolve_mode: crate::vk::ResolveModeFlagBits,
-        pub stencil_resolve_mode: crate::vk::ResolveModeFlagBits,
+        pub depth_resolve_mode: crate::vk::ResolveModeFlags,
+        pub stencil_resolve_mode: crate::vk::ResolveModeFlags,
         pub p_depth_stencil_resolve_attachment: *const crate::vk::AttachmentReference2<
             'a,
         >,
@@ -2264,14 +2264,14 @@ pub(crate) mod reexport {
     impl<'a> SubpassDescriptionDepthStencilResolve<'a> {
         pub fn depth_resolve_mode(
             mut self,
-            depth_resolve_mode: crate::vk::ResolveModeFlagBits,
+            depth_resolve_mode: crate::vk::ResolveModeFlags,
         ) -> Self {
             self.depth_resolve_mode = depth_resolve_mode;
             self
         }
         pub fn stencil_resolve_mode(
             mut self,
-            stencil_resolve_mode: crate::vk::ResolveModeFlagBits,
+            stencil_resolve_mode: crate::vk::ResolveModeFlags,
         ) -> Self {
             self.stencil_resolve_mode = stencil_resolve_mode;
             self

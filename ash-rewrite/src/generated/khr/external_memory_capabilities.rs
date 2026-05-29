@@ -82,8 +82,8 @@ pub(crate) mod reexport {
         pub const EXTERNAL_BUFFER_PROPERTIES_KHR: Self = Self::EXTERNAL_BUFFER_PROPERTIES;
         pub const PHYSICAL_DEVICE_ID_PROPERTIES_KHR: Self = Self::PHYSICAL_DEVICE_ID_PROPERTIES;
     }
-    pub type ExternalMemoryHandleTypeFlagBitsKHR = crate::vk::ExternalMemoryHandleTypeFlagBits;
-    pub type ExternalMemoryFeatureFlagBitsKHR = crate::vk::ExternalMemoryFeatureFlagBits;
+    pub type ExternalMemoryHandleTypeFlagsKHR = crate::vk::ExternalMemoryHandleTypeFlags;
+    pub type ExternalMemoryFeatureFlagsKHR = crate::vk::ExternalMemoryFeatureFlags;
     ///Provided by [`khr::external_memory_capabilities`](crate::khr::external_memory_capabilities)
     impl crate::vk::ExternalMemoryHandleTypeFlagBits {
         pub const OPAQUE_FD_KHR: Self = Self::OPAQUE_FD;

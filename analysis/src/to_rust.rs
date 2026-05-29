@@ -19,6 +19,8 @@ pub trait RustTranslator {
 
     fn type_to_rust(&self, name: TypeName, qualified: bool, lifetime: &Lifetime) -> TokenStream;
 
+    fn type_to_rust2(&self, name: TypeName, qualified: bool, lifetime: &Lifetime) -> TokenStream;
+
     fn func_pointer_to_rust(&self, name: FuncPointerName, qualified: bool) -> TokenStream;
 
     fn command_to_rust(&self, name: CommandName, qualified: bool) -> TokenStream;

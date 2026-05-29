@@ -62,7 +62,7 @@ pub(crate) mod reexport {
     pub struct ExportMetalObjectCreateInfoEXT<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub export_object_type: crate::vk::ExportMetalObjectTypeFlagBitsEXT,
+        pub export_object_type: crate::vk::ExportMetalObjectTypeFlagsEXT,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for ExportMetalObjectCreateInfoEXT<'a> {
@@ -95,7 +95,7 @@ pub(crate) mod reexport {
     impl<'a> ExportMetalObjectCreateInfoEXT<'a> {
         pub fn export_object_type(
             mut self,
-            export_object_type: crate::vk::ExportMetalObjectTypeFlagBitsEXT,
+            export_object_type: crate::vk::ExportMetalObjectTypeFlagsEXT,
         ) -> Self {
             self.export_object_type = export_object_type;
             self
@@ -269,7 +269,7 @@ pub(crate) mod reexport {
         pub image: crate::vk::Image,
         pub image_view: crate::vk::ImageView,
         pub buffer_view: crate::vk::BufferView,
-        pub plane: crate::vk::ImageAspectFlagBits,
+        pub plane: crate::vk::ImageAspectFlags,
         pub mtl_texture: crate::platform_types::MTLTexture_id,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
@@ -305,7 +305,7 @@ pub(crate) mod reexport {
             self.buffer_view = buffer_view;
             self
         }
-        pub fn plane(mut self, plane: crate::vk::ImageAspectFlagBits) -> Self {
+        pub fn plane(mut self, plane: crate::vk::ImageAspectFlags) -> Self {
             self.plane = plane;
             self
         }
@@ -322,7 +322,7 @@ pub(crate) mod reexport {
     pub struct ImportMetalTextureInfoEXT<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub plane: crate::vk::ImageAspectFlagBits,
+        pub plane: crate::vk::ImageAspectFlags,
         pub mtl_texture: crate::platform_types::MTLTexture_id,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
@@ -343,7 +343,7 @@ pub(crate) mod reexport {
         }
     }
     impl<'a> ImportMetalTextureInfoEXT<'a> {
-        pub fn plane(mut self, plane: crate::vk::ImageAspectFlagBits) -> Self {
+        pub fn plane(mut self, plane: crate::vk::ImageAspectFlags) -> Self {
             self.plane = plane;
             self
         }

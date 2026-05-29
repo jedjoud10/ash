@@ -824,7 +824,7 @@ pub(crate) mod reexport {
         pub p_next: *const core::ffi::c_void,
         pub format: crate::vk::Format,
         pub _type: crate::vk::ImageType,
-        pub samples: crate::vk::SampleCountFlagBits,
+        pub samples: crate::vk::SampleCountFlags,
         pub usage: crate::vk::ImageUsageFlags,
         pub tiling: crate::vk::ImageTiling,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
@@ -856,7 +856,7 @@ pub(crate) mod reexport {
             self._type = _type;
             self
         }
-        pub fn samples(mut self, samples: crate::vk::SampleCountFlagBits) -> Self {
+        pub fn samples(mut self, samples: crate::vk::SampleCountFlags) -> Self {
             self.samples = samples;
             self
         }
@@ -946,7 +946,7 @@ pub(crate) mod reexport {
     pub struct PhysicalDeviceExternalImageFormatInfo<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a>
@@ -968,7 +968,7 @@ pub(crate) mod reexport {
     impl<'a> PhysicalDeviceExternalImageFormatInfo<'a> {
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -1013,7 +1013,7 @@ pub(crate) mod reexport {
         pub p_next: *const core::ffi::c_void,
         pub flags: crate::vk::BufferCreateFlags,
         pub usage: crate::vk::BufferUsageFlags,
-        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for PhysicalDeviceExternalBufferInfo<'a> {
@@ -1042,7 +1042,7 @@ pub(crate) mod reexport {
         }
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -1241,7 +1241,7 @@ pub(crate) mod reexport {
     pub struct PhysicalDeviceExternalSemaphoreInfo<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub handle_type: crate::vk::ExternalSemaphoreHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalSemaphoreHandleTypeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a>
@@ -1261,7 +1261,7 @@ pub(crate) mod reexport {
     impl<'a> PhysicalDeviceExternalSemaphoreInfo<'a> {
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalSemaphoreHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalSemaphoreHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -1352,7 +1352,7 @@ pub(crate) mod reexport {
     pub struct PhysicalDeviceExternalFenceInfo<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub handle_type: crate::vk::ExternalFenceHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalFenceHandleTypeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for PhysicalDeviceExternalFenceInfo<'a> {
@@ -1371,7 +1371,7 @@ pub(crate) mod reexport {
     impl<'a> PhysicalDeviceExternalFenceInfo<'a> {
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalFenceHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalFenceHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -2828,7 +2828,7 @@ pub(crate) mod reexport {
     pub struct BindImagePlaneMemoryInfo<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub plane_aspect: crate::vk::ImageAspectFlagBits,
+        pub plane_aspect: crate::vk::ImageAspectFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for BindImagePlaneMemoryInfo<'a> {
@@ -2849,7 +2849,7 @@ pub(crate) mod reexport {
     impl<'a> BindImagePlaneMemoryInfo<'a> {
         pub fn plane_aspect(
             mut self,
-            plane_aspect: crate::vk::ImageAspectFlagBits,
+            plane_aspect: crate::vk::ImageAspectFlags,
         ) -> Self {
             self.plane_aspect = plane_aspect;
             self
@@ -2860,7 +2860,7 @@ pub(crate) mod reexport {
     pub struct ImagePlaneMemoryRequirementsInfo<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub plane_aspect: crate::vk::ImageAspectFlagBits,
+        pub plane_aspect: crate::vk::ImageAspectFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for ImagePlaneMemoryRequirementsInfo<'a> {
@@ -2881,7 +2881,7 @@ pub(crate) mod reexport {
     impl<'a> ImagePlaneMemoryRequirementsInfo<'a> {
         pub fn plane_aspect(
             mut self,
-            plane_aspect: crate::vk::ImageAspectFlagBits,
+            plane_aspect: crate::vk::ImageAspectFlags,
         ) -> Self {
             self.plane_aspect = plane_aspect;
             self

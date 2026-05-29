@@ -999,9 +999,9 @@ pub(crate) mod reexport {
         pub const TRIANGLES_HIT_GROUP_NV: Self = Self::TRIANGLES_HIT_GROUP_KHR;
         pub const PROCEDURAL_HIT_GROUP_NV: Self = Self::PROCEDURAL_HIT_GROUP_KHR;
     }
-    pub type GeometryFlagBitsNV = crate::vk::GeometryFlagBitsKHR;
-    pub type GeometryInstanceFlagBitsNV = crate::vk::GeometryInstanceFlagBitsKHR;
-    pub type BuildAccelerationStructureFlagBitsNV = crate::vk::BuildAccelerationStructureFlagBitsKHR;
+    pub type GeometryFlagsNV = crate::vk::GeometryFlagsKHR;
+    pub type GeometryInstanceFlagsNV = crate::vk::GeometryInstanceFlagsKHR;
+    pub type BuildAccelerationStructureFlagsNV = crate::vk::BuildAccelerationStructureFlagsKHR;
     pub type CopyAccelerationStructureModeNV = crate::vk::CopyAccelerationStructureModeKHR;
     pub type AccelerationStructureTypeNV = crate::vk::AccelerationStructureTypeKHR;
     pub type GeometryTypeNV = crate::vk::GeometryTypeKHR;

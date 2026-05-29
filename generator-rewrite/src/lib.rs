@@ -84,6 +84,17 @@ impl<'a> RustTranslator for Context<'a> {
     fn type_to_rust(&self, name: TypeName, qualified: bool, lifetime: &Lifetime) -> TokenStream {
         let type_item = &self.items.types[&name];
         let required_by = type_item.required_by(&self.items);
+        let ident: Ident = syn::parse_str(&name.prefix_trimmed(required_by.library).to_string().replace("FlagBits", "Flags")).unwrap();
+        let path = qualified.then(|| quote! { crate::vk:: });
+        let lifetime = self.type_has_lifetime(name).then(|| quote! { <#lifetime> });
+        quote! { #path #ident #lifetime }
+    }
+
+    // duplicate of type_to_rust but does not have the FlagsBits -> Flags replacement
+    // that could have been passed as argument but that would require changing fn signature everywhere  
+    fn type_to_rust2(&self, name: TypeName, qualified: bool, lifetime: &Lifetime) -> TokenStream {
+        let type_item = &self.items.types[&name];
+        let required_by = type_item.required_by(&self.items);
         let ident: Ident = syn::parse_str(name.prefix_trimmed(required_by.library)).unwrap();
         let path = qualified.then(|| quote! { crate::vk:: });
         let lifetime = self.type_has_lifetime(name).then(|| quote! { <#lifetime> });

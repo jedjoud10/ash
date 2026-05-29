@@ -28,7 +28,7 @@ impl crate::vk::StructureType {
 impl crate::vk::Result {
     pub const ERROR_FRAGMENTATION_EXT: Self = Self::ERROR_FRAGMENTATION;
 }
-pub type DescriptorBindingFlagBitsEXT = crate::vk::DescriptorBindingFlagBits;
+pub type DescriptorBindingFlagsEXT = crate::vk::DescriptorBindingFlags;
 ///Provided by [`ext::descriptor_indexing`](crate::ext::descriptor_indexing)
 impl crate::vk::DescriptorSetLayoutCreateFlagBits {
     pub const UPDATE_AFTER_BIND_POOL_EXT: Self = Self::UPDATE_AFTER_BIND_POOL;

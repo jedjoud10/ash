@@ -446,7 +446,7 @@ pub(crate) mod reexport {
     pub struct VideoEncodeQualityLevelPropertiesKHR<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *mut core::ffi::c_void,
-        pub preferred_rate_control_mode: crate::vk::VideoEncodeRateControlModeFlagBitsKHR,
+        pub preferred_rate_control_mode: crate::vk::VideoEncodeRateControlModeFlagsKHR,
         pub preferred_rate_control_layer_count: u32,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
@@ -468,7 +468,7 @@ pub(crate) mod reexport {
     impl<'a> VideoEncodeQualityLevelPropertiesKHR<'a> {
         pub fn preferred_rate_control_mode(
             mut self,
-            preferred_rate_control_mode: crate::vk::VideoEncodeRateControlModeFlagBitsKHR,
+            preferred_rate_control_mode: crate::vk::VideoEncodeRateControlModeFlagsKHR,
         ) -> Self {
             self.preferred_rate_control_mode = preferred_rate_control_mode;
             self
@@ -487,7 +487,7 @@ pub(crate) mod reexport {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
         pub flags: crate::vk::VideoEncodeRateControlFlagsKHR,
-        pub rate_control_mode: crate::vk::VideoEncodeRateControlModeFlagBitsKHR,
+        pub rate_control_mode: crate::vk::VideoEncodeRateControlModeFlagsKHR,
         pub layer_count: u32,
         pub p_layers: *const crate::vk::VideoEncodeRateControlLayerInfoKHR<'a>,
         pub virtual_buffer_size_in_ms: u32,
@@ -526,7 +526,7 @@ pub(crate) mod reexport {
         }
         pub fn rate_control_mode(
             mut self,
-            rate_control_mode: crate::vk::VideoEncodeRateControlModeFlagBitsKHR,
+            rate_control_mode: crate::vk::VideoEncodeRateControlModeFlagsKHR,
         ) -> Self {
             self.rate_control_mode = rate_control_mode;
             self

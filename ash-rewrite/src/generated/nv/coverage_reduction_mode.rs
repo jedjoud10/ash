@@ -142,7 +142,7 @@ pub(crate) mod reexport {
         pub s_type: crate::vk::StructureType,
         pub p_next: *mut core::ffi::c_void,
         pub coverage_reduction_mode: crate::vk::CoverageReductionModeNV,
-        pub rasterization_samples: crate::vk::SampleCountFlagBits,
+        pub rasterization_samples: crate::vk::SampleCountFlags,
         pub depth_stencil_samples: crate::vk::SampleCountFlags,
         pub color_samples: crate::vk::SampleCountFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
@@ -174,7 +174,7 @@ pub(crate) mod reexport {
         }
         pub fn rasterization_samples(
             mut self,
-            rasterization_samples: crate::vk::SampleCountFlagBits,
+            rasterization_samples: crate::vk::SampleCountFlags,
         ) -> Self {
             self.rasterization_samples = rasterization_samples;
             self

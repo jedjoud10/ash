@@ -14,8 +14,8 @@ impl crate::vk::StructureType {
     pub const SURFACE_PRESENT_SCALING_CAPABILITIES_EXT: Self = Self::SURFACE_PRESENT_SCALING_CAPABILITIES_KHR;
     pub const SURFACE_PRESENT_MODE_COMPATIBILITY_EXT: Self = Self::SURFACE_PRESENT_MODE_COMPATIBILITY_KHR;
 }
-pub type PresentScalingFlagBitsEXT = crate::vk::PresentScalingFlagBitsKHR;
-pub type PresentGravityFlagBitsEXT = crate::vk::PresentGravityFlagBitsKHR;
+pub type PresentScalingFlagsEXT = crate::vk::PresentScalingFlagsKHR;
+pub type PresentGravityFlagsEXT = crate::vk::PresentGravityFlagsKHR;
 pub type PresentScalingFlagsEXT = crate::vk::PresentScalingFlagsKHR;
 pub type PresentGravityFlagsEXT = crate::vk::PresentGravityFlagsKHR;
 pub const EXT_SURFACE_MAINTENANCE_1_SPEC_VERSION: u32 = 1;

@@ -20,7 +20,7 @@ impl DeviceFn {
             get_memory_host_pointer_properties_ext: unsafe {
                 unsafe extern "system" fn get_memory_host_pointer_properties_ext(
                     _: crate::vk::Device,
-                    _: crate::vk::ExternalMemoryHandleTypeFlagBits,
+                    _: crate::vk::ExternalMemoryHandleTypeFlags,
                     _: *const core::ffi::c_void,
                     _: *mut crate::vk::MemoryHostPointerPropertiesEXT<'_>,
                 ) -> crate::vk::Result {
@@ -64,7 +64,7 @@ pub(crate) mod reexport {
     pub struct ImportMemoryHostPointerInfoEXT<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         pub p_host_pointer: *mut core::ffi::c_void,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
@@ -87,7 +87,7 @@ pub(crate) mod reexport {
     impl<'a> ImportMemoryHostPointerInfoEXT<'a> {
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -172,7 +172,7 @@ pub(crate) mod reexport {
     }
     pub type PFN_vkGetMemoryHostPointerPropertiesEXT = unsafe extern "system" fn(
         device: crate::vk::Device,
-        handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+        handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         p_host_pointer: *const core::ffi::c_void,
         p_memory_host_pointer_properties: *mut crate::vk::MemoryHostPointerPropertiesEXT<
             '_,

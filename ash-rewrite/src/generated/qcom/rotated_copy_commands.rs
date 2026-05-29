@@ -6,7 +6,7 @@
 pub struct CopyCommandTransformInfoQCOM<'a> {
     pub s_type: crate::vk::StructureType,
     pub p_next: *const core::ffi::c_void,
-    pub transform: crate::vk::SurfaceTransformFlagBitsKHR,
+    pub transform: crate::vk::SurfaceTransformFlagsKHR,
     pub _marker: ::core::marker::PhantomData<&'a ()>,
 }
 unsafe impl<'a> crate::TaggedStructure<'a> for CopyCommandTransformInfoQCOM<'a> {
@@ -29,10 +29,7 @@ impl<'a> Default for CopyCommandTransformInfoQCOM<'a> {
     }
 }
 impl<'a> CopyCommandTransformInfoQCOM<'a> {
-    pub fn transform(
-        mut self,
-        transform: crate::vk::SurfaceTransformFlagBitsKHR,
-    ) -> Self {
+    pub fn transform(mut self, transform: crate::vk::SurfaceTransformFlagsKHR) -> Self {
         self.transform = transform;
         self
     }

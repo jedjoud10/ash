@@ -135,7 +135,7 @@ pub(crate) mod reexport {
         pub max_image_extent: crate::vk::Extent2D,
         pub max_image_array_layers: u32,
         pub supported_transforms: crate::vk::SurfaceTransformFlagsKHR,
-        pub current_transform: crate::vk::SurfaceTransformFlagBitsKHR,
+        pub current_transform: crate::vk::SurfaceTransformFlagsKHR,
         pub supported_composite_alpha: crate::vk::CompositeAlphaFlagsKHR,
         pub supported_usage_flags: crate::vk::ImageUsageFlags,
     }
@@ -179,7 +179,7 @@ pub(crate) mod reexport {
         }
         pub fn current_transform(
             mut self,
-            current_transform: crate::vk::SurfaceTransformFlagBitsKHR,
+            current_transform: crate::vk::SurfaceTransformFlagsKHR,
         ) -> Self {
             self.current_transform = current_transform;
             self

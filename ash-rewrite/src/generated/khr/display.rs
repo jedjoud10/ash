@@ -383,9 +383,9 @@ pub(crate) mod reexport {
         pub display_mode: crate::vk::DisplayModeKHR,
         pub plane_index: u32,
         pub plane_stack_index: u32,
-        pub transform: crate::vk::SurfaceTransformFlagBitsKHR,
+        pub transform: crate::vk::SurfaceTransformFlagsKHR,
         pub global_alpha: core::ffi::c_float,
-        pub alpha_mode: crate::vk::DisplayPlaneAlphaFlagBitsKHR,
+        pub alpha_mode: crate::vk::DisplayPlaneAlphaFlagsKHR,
         pub image_extent: crate::vk::Extent2D,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
@@ -428,7 +428,7 @@ pub(crate) mod reexport {
         }
         pub fn transform(
             mut self,
-            transform: crate::vk::SurfaceTransformFlagBitsKHR,
+            transform: crate::vk::SurfaceTransformFlagsKHR,
         ) -> Self {
             self.transform = transform;
             self
@@ -439,7 +439,7 @@ pub(crate) mod reexport {
         }
         pub fn alpha_mode(
             mut self,
-            alpha_mode: crate::vk::DisplayPlaneAlphaFlagBitsKHR,
+            alpha_mode: crate::vk::DisplayPlaneAlphaFlagsKHR,
         ) -> Self {
             self.alpha_mode = alpha_mode;
             self

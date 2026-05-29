@@ -211,7 +211,7 @@ impl InstanceFn {
             submit_debug_utils_message_ext: unsafe {
                 unsafe extern "system" fn submit_debug_utils_message_ext(
                     _: crate::vk::Instance,
-                    _: crate::vk::DebugUtilsMessageSeverityFlagBitsEXT,
+                    _: crate::vk::DebugUtilsMessageSeverityFlagsEXT,
                     _: crate::vk::DebugUtilsMessageTypeFlagsEXT,
                     _: *const crate::vk::DebugUtilsMessengerCallbackDataEXT<'_>,
                 ) {
@@ -922,7 +922,7 @@ pub(crate) mod reexport {
     }
     pub type PFN_vkDebugUtilsMessengerCallbackEXT = Option<
         unsafe extern "system" fn(
-            message_severity: crate::vk::DebugUtilsMessageSeverityFlagBitsEXT,
+            message_severity: crate::vk::DebugUtilsMessageSeverityFlagsEXT,
             message_types: crate::vk::DebugUtilsMessageTypeFlagsEXT,
             p_callback_data: *const crate::vk::DebugUtilsMessengerCallbackDataEXT<'_>,
             p_user_data: *mut core::ffi::c_void,
@@ -971,7 +971,7 @@ pub(crate) mod reexport {
     );
     pub type PFN_vkSubmitDebugUtilsMessageEXT = unsafe extern "system" fn(
         instance: crate::vk::Instance,
-        message_severity: crate::vk::DebugUtilsMessageSeverityFlagBitsEXT,
+        message_severity: crate::vk::DebugUtilsMessageSeverityFlagsEXT,
         message_types: crate::vk::DebugUtilsMessageTypeFlagsEXT,
         p_callback_data: *const crate::vk::DebugUtilsMessengerCallbackDataEXT<'_>,
     );

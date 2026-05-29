@@ -1028,12 +1028,12 @@ pub(crate) mod reexport {
     #[repr(C)]
     #[derive(Clone, Copy, Default)]
     pub struct IndirectCommandsIndexBufferTokenEXT {
-        pub mode: crate::vk::IndirectCommandsInputModeFlagBitsEXT,
+        pub mode: crate::vk::IndirectCommandsInputModeFlagsEXT,
     }
     impl IndirectCommandsIndexBufferTokenEXT {
         pub fn mode(
             mut self,
-            mode: crate::vk::IndirectCommandsInputModeFlagBitsEXT,
+            mode: crate::vk::IndirectCommandsInputModeFlagsEXT,
         ) -> Self {
             self.mode = mode;
             self

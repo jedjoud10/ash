@@ -266,7 +266,7 @@ pub(crate) mod reexport {
         pub max_fragment_size: crate::vk::Extent2D,
         pub max_fragment_size_aspect_ratio: u32,
         pub max_fragment_shading_rate_coverage_samples: u32,
-        pub max_fragment_shading_rate_rasterization_samples: crate::vk::SampleCountFlagBits,
+        pub max_fragment_shading_rate_rasterization_samples: crate::vk::SampleCountFlags,
         pub fragment_shading_rate_with_shader_depth_stencil_writes: crate::vk::Bool32,
         pub fragment_shading_rate_with_sample_mask: crate::vk::Bool32,
         pub fragment_shading_rate_with_shader_sample_mask: crate::vk::Bool32,
@@ -377,7 +377,7 @@ pub(crate) mod reexport {
         }
         pub fn max_fragment_shading_rate_rasterization_samples(
             mut self,
-            max_fragment_shading_rate_rasterization_samples: crate::vk::SampleCountFlagBits,
+            max_fragment_shading_rate_rasterization_samples: crate::vk::SampleCountFlags,
         ) -> Self {
             self.max_fragment_shading_rate_rasterization_samples = max_fragment_shading_rate_rasterization_samples;
             self

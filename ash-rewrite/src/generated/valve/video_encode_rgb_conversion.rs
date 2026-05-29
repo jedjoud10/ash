@@ -134,10 +134,10 @@ impl<'a> VideoEncodeProfileRgbConversionInfoVALVE<'a> {
 pub struct VideoEncodeSessionRgbConversionCreateInfoVALVE<'a> {
     pub s_type: crate::vk::StructureType,
     pub p_next: *const core::ffi::c_void,
-    pub rgb_model: crate::vk::VideoEncodeRgbModelConversionFlagBitsVALVE,
-    pub rgb_range: crate::vk::VideoEncodeRgbRangeCompressionFlagBitsVALVE,
-    pub x_chroma_offset: crate::vk::VideoEncodeRgbChromaOffsetFlagBitsVALVE,
-    pub y_chroma_offset: crate::vk::VideoEncodeRgbChromaOffsetFlagBitsVALVE,
+    pub rgb_model: crate::vk::VideoEncodeRgbModelConversionFlagsVALVE,
+    pub rgb_range: crate::vk::VideoEncodeRgbRangeCompressionFlagsVALVE,
+    pub x_chroma_offset: crate::vk::VideoEncodeRgbChromaOffsetFlagsVALVE,
+    pub y_chroma_offset: crate::vk::VideoEncodeRgbChromaOffsetFlagsVALVE,
     pub _marker: ::core::marker::PhantomData<&'a ()>,
 }
 unsafe impl<'a> crate::TaggedStructure<'a>
@@ -162,28 +162,28 @@ impl<'a> Default for VideoEncodeSessionRgbConversionCreateInfoVALVE<'a> {
 impl<'a> VideoEncodeSessionRgbConversionCreateInfoVALVE<'a> {
     pub fn rgb_model(
         mut self,
-        rgb_model: crate::vk::VideoEncodeRgbModelConversionFlagBitsVALVE,
+        rgb_model: crate::vk::VideoEncodeRgbModelConversionFlagsVALVE,
     ) -> Self {
         self.rgb_model = rgb_model;
         self
     }
     pub fn rgb_range(
         mut self,
-        rgb_range: crate::vk::VideoEncodeRgbRangeCompressionFlagBitsVALVE,
+        rgb_range: crate::vk::VideoEncodeRgbRangeCompressionFlagsVALVE,
     ) -> Self {
         self.rgb_range = rgb_range;
         self
     }
     pub fn x_chroma_offset(
         mut self,
-        x_chroma_offset: crate::vk::VideoEncodeRgbChromaOffsetFlagBitsVALVE,
+        x_chroma_offset: crate::vk::VideoEncodeRgbChromaOffsetFlagsVALVE,
     ) -> Self {
         self.x_chroma_offset = x_chroma_offset;
         self
     }
     pub fn y_chroma_offset(
         mut self,
-        y_chroma_offset: crate::vk::VideoEncodeRgbChromaOffsetFlagBitsVALVE,
+        y_chroma_offset: crate::vk::VideoEncodeRgbChromaOffsetFlagsVALVE,
     ) -> Self {
         self.y_chroma_offset = y_chroma_offset;
         self

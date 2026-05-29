@@ -272,7 +272,7 @@ impl InstanceFnV1_0 {
                     _: crate::vk::PhysicalDevice,
                     _: crate::vk::Format,
                     _: crate::vk::ImageType,
-                    _: crate::vk::SampleCountFlagBits,
+                    _: crate::vk::SampleCountFlags,
                     _: crate::vk::ImageUsageFlags,
                     _: crate::vk::ImageTiling,
                     _: *mut u32,
@@ -2150,7 +2150,7 @@ impl DeviceFnV1_0 {
             cmd_write_timestamp: unsafe {
                 unsafe extern "system" fn cmd_write_timestamp(
                     _: crate::vk::CommandBuffer,
-                    _: crate::vk::PipelineStageFlagBits,
+                    _: crate::vk::PipelineStageFlags,
                     _: crate::vk::QueryPool,
                     _: u32,
                 ) {
@@ -3876,7 +3876,7 @@ pub(crate) mod reexport {
         pub extent: crate::vk::Extent3D,
         pub mip_levels: u32,
         pub array_layers: u32,
-        pub samples: crate::vk::SampleCountFlagBits,
+        pub samples: crate::vk::SampleCountFlags,
         pub tiling: crate::vk::ImageTiling,
         pub usage: crate::vk::ImageUsageFlags,
         pub sharing_mode: crate::vk::SharingMode,
@@ -3935,7 +3935,7 @@ pub(crate) mod reexport {
             self.array_layers = array_layers;
             self
         }
-        pub fn samples(mut self, samples: crate::vk::SampleCountFlagBits) -> Self {
+        pub fn samples(mut self, samples: crate::vk::SampleCountFlags) -> Self {
             self.samples = samples;
             self
         }
@@ -4779,7 +4779,7 @@ pub(crate) mod reexport {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
         pub flags: crate::vk::PipelineShaderStageCreateFlags,
-        pub stage: crate::vk::ShaderStageFlagBits,
+        pub stage: crate::vk::ShaderStageFlags,
         pub module: crate::vk::ShaderModule,
         pub p_name: *const core::ffi::c_char,
         pub p_specialization_info: *const crate::vk::SpecializationInfo<'a>,
@@ -4810,7 +4810,7 @@ pub(crate) mod reexport {
             self.flags = flags;
             self
         }
-        pub fn stage(mut self, stage: crate::vk::ShaderStageFlagBits) -> Self {
+        pub fn stage(mut self, stage: crate::vk::ShaderStageFlags) -> Self {
             self.stage = stage;
             self
         }
@@ -5258,7 +5258,7 @@ pub(crate) mod reexport {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
         pub flags: crate::vk::PipelineMultisampleStateCreateFlags,
-        pub rasterization_samples: crate::vk::SampleCountFlagBits,
+        pub rasterization_samples: crate::vk::SampleCountFlags,
         pub sample_shading_enable: crate::vk::Bool32,
         pub min_sample_shading: core::ffi::c_float,
         pub p_sample_mask: *const crate::vk::SampleMask,
@@ -5296,7 +5296,7 @@ pub(crate) mod reexport {
         }
         pub fn rasterization_samples(
             mut self,
-            rasterization_samples: crate::vk::SampleCountFlagBits,
+            rasterization_samples: crate::vk::SampleCountFlags,
         ) -> Self {
             self.rasterization_samples = rasterization_samples;
             self
@@ -6385,7 +6385,7 @@ pub(crate) mod reexport {
     pub struct AttachmentDescription {
         pub flags: crate::vk::AttachmentDescriptionFlags,
         pub format: crate::vk::Format,
-        pub samples: crate::vk::SampleCountFlagBits,
+        pub samples: crate::vk::SampleCountFlags,
         pub load_op: crate::vk::AttachmentLoadOp,
         pub store_op: crate::vk::AttachmentStoreOp,
         pub stencil_load_op: crate::vk::AttachmentLoadOp,
@@ -6402,7 +6402,7 @@ pub(crate) mod reexport {
             self.format = format;
             self
         }
-        pub fn samples(mut self, samples: crate::vk::SampleCountFlagBits) -> Self {
+        pub fn samples(mut self, samples: crate::vk::SampleCountFlags) -> Self {
             self.samples = samples;
             self
         }
@@ -15530,7 +15530,7 @@ pub(crate) mod reexport {
         physical_device: crate::vk::PhysicalDevice,
         format: crate::vk::Format,
         _type: crate::vk::ImageType,
-        samples: crate::vk::SampleCountFlagBits,
+        samples: crate::vk::SampleCountFlags,
         usage: crate::vk::ImageUsageFlags,
         tiling: crate::vk::ImageTiling,
         p_property_count: *mut u32,
@@ -16117,7 +16117,7 @@ pub(crate) mod reexport {
     );
     pub type PFN_vkCmdWriteTimestamp = unsafe extern "system" fn(
         command_buffer: crate::vk::CommandBuffer,
-        pipeline_stage: crate::vk::PipelineStageFlagBits,
+        pipeline_stage: crate::vk::PipelineStageFlags,
         query_pool: crate::vk::QueryPool,
         query: u32,
     );
