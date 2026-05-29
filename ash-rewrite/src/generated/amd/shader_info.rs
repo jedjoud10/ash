@@ -21,7 +21,7 @@ impl DeviceFn {
                 unsafe extern "system" fn get_shader_info_amd(
                     _: crate::vk::Device,
                     _: crate::vk::Pipeline,
-                    _: crate::vk::ShaderStageFlagBits,
+                    _: crate::vk::ShaderStageFlags,
                     _: crate::vk::ShaderInfoTypeAMD,
                     _: *mut usize,
                     _: *mut core::ffi::c_void,
@@ -163,7 +163,7 @@ pub(crate) mod reexport {
     pub type PFN_vkGetShaderInfoAMD = unsafe extern "system" fn(
         device: crate::vk::Device,
         pipeline: crate::vk::Pipeline,
-        shader_stage: crate::vk::ShaderStageFlagBits,
+        shader_stage: crate::vk::ShaderStageFlags,
         info_type: crate::vk::ShaderInfoTypeAMD,
         p_info_size: *mut usize,
         p_info: *mut core::ffi::c_void,

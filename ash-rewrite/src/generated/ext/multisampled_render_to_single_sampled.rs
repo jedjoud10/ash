@@ -72,7 +72,7 @@ pub struct MultisampledRenderToSingleSampledInfoEXT<'a> {
     pub s_type: crate::vk::StructureType,
     pub p_next: *const core::ffi::c_void,
     pub multisampled_render_to_single_sampled_enable: crate::vk::Bool32,
-    pub rasterization_samples: crate::vk::SampleCountFlagBits,
+    pub rasterization_samples: crate::vk::SampleCountFlags,
     pub _marker: ::core::marker::PhantomData<&'a ()>,
 }
 unsafe impl<'a> crate::TaggedStructure<'a>
@@ -105,7 +105,7 @@ impl<'a> MultisampledRenderToSingleSampledInfoEXT<'a> {
     }
     pub fn rasterization_samples(
         mut self,
-        rasterization_samples: crate::vk::SampleCountFlagBits,
+        rasterization_samples: crate::vk::SampleCountFlags,
     ) -> Self {
         self.rasterization_samples = rasterization_samples;
         self

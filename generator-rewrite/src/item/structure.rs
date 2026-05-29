@@ -204,6 +204,7 @@ fn decl_setter_and_getter(
     lifetime: &Lifetime,
 ) -> TokenStream {
     let field_name = ctx.var_name_to_rust(decl.name);
+    let trimmed_field_name = ctx.trimmed_var_name_to_rust(decl.name);   
 
     match decl.ty {
         Ty::SpecType(TypeName::VK_BOOL32) => {
@@ -218,14 +219,15 @@ fn decl_setter_and_getter(
             if len.first().is_some_and(|l| l == &Length::NullTerminated) =>
         {
             let ty = Ty::Ref(&Ty::RustType(RustType::CStr), mutability).to_rust(ctx, lifetime);
-            let field_name_as_cstr = format_ident!("{field_name}_as_c_str");
+            let trimmed_field_name_as_cstr = format_ident!("{trimmed_field_name}_as_c_str");
+            
             quote! {
-                pub fn #field_name(mut self, #field_name: #ty) -> Self {
-                    self.#field_name = #field_name.as_ptr();
+                pub fn #trimmed_field_name(mut self, #trimmed_field_name: #ty) -> Self {
+                    self.#field_name = #trimmed_field_name.as_ptr();
                     self
                 }
 
-                pub unsafe fn #field_name_as_cstr(&self) -> Option<&core::ffi::CStr> {
+                pub unsafe fn #trimmed_field_name_as_cstr(&self) -> Option<&core::ffi::CStr> {
                     if self.#field_name.is_null() {
                         None
                     } else {
@@ -237,29 +239,29 @@ fn decl_setter_and_getter(
         Ty::Array(Ty::CPrimary(CPrimaryType::Char), _)
             if len.first().is_some_and(|l| l == &Length::NullTerminated) =>
         {
-            let field_name_as_cstr = format_ident!("{field_name}_as_c_str");
+            let trimmed_field_name_as_cstr = format_ident!("{trimmed_field_name}_as_c_str");
             quote! {
-                pub fn #field_name(mut self, #field_name: &core::ffi::CStr) -> core::result::Result<Self, crate::CStrTooLargeForStaticArray> {
-                    crate::write_c_str_slice_with_nul(&mut self.#field_name, #field_name).map(|_| self)
+                pub fn #trimmed_field_name(mut self, #trimmed_field_name: &core::ffi::CStr) -> core::result::Result<Self, crate::CStrTooLargeForStaticArray> {
+                    crate::write_c_str_slice_with_nul(&mut self.#field_name, #trimmed_field_name).map(|_| self)
                 }
 
-                pub fn #field_name_as_cstr(&self) -> core::result::Result<&core::ffi::CStr, core::ffi::FromBytesUntilNulError> {
+                pub fn #trimmed_field_name_as_cstr(&self) -> core::result::Result<&core::ffi::CStr, core::ffi::FromBytesUntilNulError> {
                     crate::wrap_c_str_slice_until_nul(&self.#field_name)
                 }
             }
         }
         Ty::Array(base, _) if let Some(Length::Member(len_var)) = len.first() => {
             let len_var = ctx.var_name_to_rust(*len_var);
-            let field_name_as_slice = format_ident!("{field_name}_as_slice");
+            let trimmed_field_name_as_slice = format_ident!("{trimmed_field_name}_as_slice");
             let base_ty = array_base_ty(base, ctx, lifetime, len);
             quote! {
-                pub fn #field_name(mut self, #field_name: &[#base_ty]) -> Self {
-                    self.#len_var = #field_name.len() as _;
-                    self.#field_name[..#field_name.len()].copy_from_slice(#field_name);
+                pub fn #trimmed_field_name(mut self, #trimmed_field_name: &[#base_ty]) -> Self {
+                    self.#len_var = #trimmed_field_name.len() as _;
+                    self.#field_name[..#trimmed_field_name.len()].copy_from_slice(#trimmed_field_name);
                     self
                 }
 
-                pub fn #field_name_as_slice(&self) -> &[#base_ty] {
+                pub fn #trimmed_field_name_as_slice(&self) -> &[#base_ty] {
                     &self.#field_name[..self.#len_var as _]
                 }
             }
@@ -289,9 +291,9 @@ fn decl_setter_and_getter(
                 Mutability::Mut => quote! {mut},
             };
             quote! {
-                pub fn #field_name(mut self, #field_name: &#lifetime #mutability #base_ty) -> Self {
-                    self.#len_var = #field_name.len() as _;
-                    self.#field_name = #field_name #ptr;
+                pub fn #trimmed_field_name(mut self, #trimmed_field_name: &#lifetime #mutability #base_ty) -> Self {
+                    self.#len_var = #trimmed_field_name.len() as _;
+                    self.#field_name = #trimmed_field_name #ptr;
                     self
                 }
             }
@@ -299,8 +301,8 @@ fn decl_setter_and_getter(
         Ty::Ptr(base, mutability) if len.first().is_none_or(|l| l == &Length::Pointer) => {
             let ty = Ty::Ref(base, mutability).to_rust(ctx, lifetime);
             quote! {
-                pub fn #field_name(mut self, #field_name: #ty) -> Self {
-                    self.#field_name = #field_name;
+                pub fn #trimmed_field_name(mut self, #trimmed_field_name: #ty) -> Self {
+                    self.#field_name = #trimmed_field_name;
                     self
                 }
             }
@@ -311,8 +313,8 @@ fn decl_setter_and_getter(
                     tracing::warn!(?custom, "unhandled custom length");
                     let ty = decl.ty.to_rust(ctx, lifetime);
                     quote! {
-                        pub fn #field_name(mut self, #field_name: #ty) -> Self {
-                            self.#field_name = #field_name;
+                        pub fn #trimmed_field_name(mut self, #trimmed_field_name: #ty) -> Self {
+                            self.#field_name = #trimmed_field_name;
                             self
                         }
                     }
@@ -322,8 +324,8 @@ fn decl_setter_and_getter(
         _ => {
             let ty = decl.ty.to_rust(ctx, lifetime);
             quote! {
-                pub fn #field_name(mut self, #field_name: #ty) -> Self {
-                    self.#field_name = #field_name;
+                pub fn #trimmed_field_name(mut self, #trimmed_field_name: #ty) -> Self {
+                    self.#field_name = #trimmed_field_name;
                     self
                 }
             }

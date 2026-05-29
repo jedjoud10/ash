@@ -36,7 +36,7 @@ impl DeviceFn {
             get_memory_zircon_handle_properties_fuchsia: unsafe {
                 unsafe extern "system" fn get_memory_zircon_handle_properties_fuchsia(
                     _: crate::vk::Device,
-                    _: crate::vk::ExternalMemoryHandleTypeFlagBits,
+                    _: crate::vk::ExternalMemoryHandleTypeFlags,
                     _: crate::platform_types::zx_handle_t,
                     _: *mut crate::vk::MemoryZirconHandlePropertiesFUCHSIA<'_>,
                 ) -> crate::vk::Result {
@@ -58,7 +58,7 @@ pub(crate) mod reexport {
     pub struct ImportMemoryZirconHandleInfoFUCHSIA<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         pub handle: crate::platform_types::zx_handle_t,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
@@ -82,7 +82,7 @@ pub(crate) mod reexport {
     impl<'a> ImportMemoryZirconHandleInfoFUCHSIA<'a> {
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -126,7 +126,7 @@ pub(crate) mod reexport {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
         pub memory: crate::vk::DeviceMemory,
-        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for MemoryGetZirconHandleInfoFUCHSIA<'a> {
@@ -150,7 +150,7 @@ pub(crate) mod reexport {
         }
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -173,7 +173,7 @@ pub(crate) mod reexport {
     ) -> crate::vk::Result;
     pub type PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA = unsafe extern "system" fn(
         device: crate::vk::Device,
-        handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+        handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         zircon_handle: crate::platform_types::zx_handle_t,
         p_memory_zircon_handle_properties: *mut crate::vk::MemoryZirconHandlePropertiesFUCHSIA<
             '_,

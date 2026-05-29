@@ -105,7 +105,7 @@ pub(crate) mod reexport {
     pub struct CheckpointDataNV<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *mut core::ffi::c_void,
-        pub stage: crate::vk::PipelineStageFlagBits,
+        pub stage: crate::vk::PipelineStageFlags,
         pub p_checkpoint_marker: *mut core::ffi::c_void,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
@@ -124,15 +124,15 @@ pub(crate) mod reexport {
         }
     }
     impl<'a> CheckpointDataNV<'a> {
-        pub fn stage(mut self, stage: crate::vk::PipelineStageFlagBits) -> Self {
+        pub fn stage(mut self, stage: crate::vk::PipelineStageFlags) -> Self {
             self.stage = stage;
             self
         }
-        pub fn p_checkpoint_marker(
+        pub fn checkpoint_marker(
             mut self,
-            p_checkpoint_marker: &'a mut core::ffi::c_void,
+            checkpoint_marker: &'a mut core::ffi::c_void,
         ) -> Self {
-            self.p_checkpoint_marker = p_checkpoint_marker;
+            self.p_checkpoint_marker = checkpoint_marker;
             self
         }
     }
@@ -197,11 +197,11 @@ pub(crate) mod reexport {
             self.stage = stage;
             self
         }
-        pub fn p_checkpoint_marker(
+        pub fn checkpoint_marker(
             mut self,
-            p_checkpoint_marker: &'a mut core::ffi::c_void,
+            checkpoint_marker: &'a mut core::ffi::c_void,
         ) -> Self {
-            self.p_checkpoint_marker = p_checkpoint_marker;
+            self.p_checkpoint_marker = checkpoint_marker;
             self
         }
     }

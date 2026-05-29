@@ -77,7 +77,7 @@ impl<'a> VideoEncodeIntraRefreshCapabilitiesKHR<'a> {
 pub struct VideoEncodeSessionIntraRefreshCreateInfoKHR<'a> {
     pub s_type: crate::vk::StructureType,
     pub p_next: *const core::ffi::c_void,
-    pub intra_refresh_mode: crate::vk::VideoEncodeIntraRefreshModeFlagBitsKHR,
+    pub intra_refresh_mode: crate::vk::VideoEncodeIntraRefreshModeFlagsKHR,
     pub _marker: ::core::marker::PhantomData<&'a ()>,
 }
 unsafe impl<'a> crate::TaggedStructure<'a>
@@ -99,7 +99,7 @@ impl<'a> Default for VideoEncodeSessionIntraRefreshCreateInfoKHR<'a> {
 impl<'a> VideoEncodeSessionIntraRefreshCreateInfoKHR<'a> {
     pub fn intra_refresh_mode(
         mut self,
-        intra_refresh_mode: crate::vk::VideoEncodeIntraRefreshModeFlagBitsKHR,
+        intra_refresh_mode: crate::vk::VideoEncodeIntraRefreshModeFlagsKHR,
     ) -> Self {
         self.intra_refresh_mode = intra_refresh_mode;
         self

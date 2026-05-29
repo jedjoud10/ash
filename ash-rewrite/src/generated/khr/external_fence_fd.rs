@@ -58,7 +58,7 @@ pub(crate) mod reexport {
         pub p_next: *const core::ffi::c_void,
         pub fence: crate::vk::Fence,
         pub flags: crate::vk::FenceImportFlags,
-        pub handle_type: crate::vk::ExternalFenceHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalFenceHandleTypeFlags,
         pub fd: core::ffi::c_int,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
@@ -89,7 +89,7 @@ pub(crate) mod reexport {
         }
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalFenceHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalFenceHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -105,7 +105,7 @@ pub(crate) mod reexport {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
         pub fence: crate::vk::Fence,
-        pub handle_type: crate::vk::ExternalFenceHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalFenceHandleTypeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for FenceGetFdInfoKHR<'a> {
@@ -129,7 +129,7 @@ pub(crate) mod reexport {
         }
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalFenceHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalFenceHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self

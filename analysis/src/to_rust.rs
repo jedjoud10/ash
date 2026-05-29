@@ -15,7 +15,11 @@ use syn::Ident;
 pub trait RustTranslator {
     fn var_name_to_rust(&self, name: VariableName) -> Ident;
 
+    fn trimmed_var_name_to_rust(&self, name: VariableName) -> Ident;
+
     fn type_to_rust(&self, name: TypeName, qualified: bool, lifetime: &Lifetime) -> TokenStream;
+
+    fn type_to_rust_without_bit_flags_replacement(&self, name: TypeName, qualified: bool, lifetime: &Lifetime) -> TokenStream;
 
     fn func_pointer_to_rust(&self, name: FuncPointerName, qualified: bool) -> TokenStream;
 

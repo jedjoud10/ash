@@ -780,7 +780,7 @@ pub(crate) mod reexport {
         pub p_next: *const core::ffi::c_void,
         pub format: crate::vk::Format,
         pub _type: crate::vk::ImageType,
-        pub samples: crate::vk::SampleCountFlagBits,
+        pub samples: crate::vk::SampleCountFlags,
         pub usage: crate::vk::ImageUsageFlags,
         pub tiling: crate::vk::ImageTiling,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
@@ -812,7 +812,7 @@ pub(crate) mod reexport {
             self._type = _type;
             self
         }
-        pub fn samples(mut self, samples: crate::vk::SampleCountFlagBits) -> Self {
+        pub fn samples(mut self, samples: crate::vk::SampleCountFlags) -> Self {
             self.samples = samples;
             self
         }
@@ -902,7 +902,7 @@ pub(crate) mod reexport {
     pub struct PhysicalDeviceExternalImageFormatInfo<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a>
@@ -924,7 +924,7 @@ pub(crate) mod reexport {
     impl<'a> PhysicalDeviceExternalImageFormatInfo<'a> {
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -969,7 +969,7 @@ pub(crate) mod reexport {
         pub p_next: *const core::ffi::c_void,
         pub flags: crate::vk::BufferCreateFlags,
         pub usage: crate::vk::BufferUsageFlags,
-        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for PhysicalDeviceExternalBufferInfo<'a> {
@@ -998,7 +998,7 @@ pub(crate) mod reexport {
         }
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalMemoryHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalMemoryHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -1197,7 +1197,7 @@ pub(crate) mod reexport {
     pub struct PhysicalDeviceExternalSemaphoreInfo<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub handle_type: crate::vk::ExternalSemaphoreHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalSemaphoreHandleTypeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a>
@@ -1217,7 +1217,7 @@ pub(crate) mod reexport {
     impl<'a> PhysicalDeviceExternalSemaphoreInfo<'a> {
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalSemaphoreHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalSemaphoreHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -1308,7 +1308,7 @@ pub(crate) mod reexport {
     pub struct PhysicalDeviceExternalFenceInfo<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub handle_type: crate::vk::ExternalFenceHandleTypeFlagBits,
+        pub handle_type: crate::vk::ExternalFenceHandleTypeFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for PhysicalDeviceExternalFenceInfo<'a> {
@@ -1327,7 +1327,7 @@ pub(crate) mod reexport {
     impl<'a> PhysicalDeviceExternalFenceInfo<'a> {
         pub fn handle_type(
             mut self,
-            handle_type: crate::vk::ExternalFenceHandleTypeFlagBits,
+            handle_type: crate::vk::ExternalFenceHandleTypeFlags,
         ) -> Self {
             self.handle_type = handle_type;
             self
@@ -1542,27 +1542,27 @@ pub(crate) mod reexport {
             self.subpass_count = subpass_count;
             self
         }
-        pub fn p_view_masks(mut self, p_view_masks: &'a [u32]) -> Self {
-            self.subpass_count = p_view_masks.len() as _;
-            self.p_view_masks = p_view_masks.as_ptr();
+        pub fn view_masks(mut self, view_masks: &'a [u32]) -> Self {
+            self.subpass_count = view_masks.len() as _;
+            self.p_view_masks = view_masks.as_ptr();
             self
         }
         pub fn dependency_count(mut self, dependency_count: u32) -> Self {
             self.dependency_count = dependency_count;
             self
         }
-        pub fn p_view_offsets(mut self, p_view_offsets: &'a [i32]) -> Self {
-            self.dependency_count = p_view_offsets.len() as _;
-            self.p_view_offsets = p_view_offsets.as_ptr();
+        pub fn view_offsets(mut self, view_offsets: &'a [i32]) -> Self {
+            self.dependency_count = view_offsets.len() as _;
+            self.p_view_offsets = view_offsets.as_ptr();
             self
         }
         pub fn correlation_mask_count(mut self, correlation_mask_count: u32) -> Self {
             self.correlation_mask_count = correlation_mask_count;
             self
         }
-        pub fn p_correlation_masks(mut self, p_correlation_masks: &'a [u32]) -> Self {
-            self.correlation_mask_count = p_correlation_masks.len() as _;
-            self.p_correlation_masks = p_correlation_masks.as_ptr();
+        pub fn correlation_masks(mut self, correlation_masks: &'a [u32]) -> Self {
+            self.correlation_mask_count = correlation_masks.len() as _;
+            self.p_correlation_masks = correlation_masks.as_ptr();
             self
         }
     }
@@ -1718,9 +1718,9 @@ pub(crate) mod reexport {
             self.device_index_count = device_index_count;
             self
         }
-        pub fn p_device_indices(mut self, p_device_indices: &'a [u32]) -> Self {
-            self.device_index_count = p_device_indices.len() as _;
-            self.p_device_indices = p_device_indices.as_ptr();
+        pub fn device_indices(mut self, device_indices: &'a [u32]) -> Self {
+            self.device_index_count = device_indices.len() as _;
+            self.p_device_indices = device_indices.as_ptr();
             self
         }
     }
@@ -1797,9 +1797,9 @@ pub(crate) mod reexport {
             self.device_index_count = device_index_count;
             self
         }
-        pub fn p_device_indices(mut self, p_device_indices: &'a [u32]) -> Self {
-            self.device_index_count = p_device_indices.len() as _;
-            self.p_device_indices = p_device_indices.as_ptr();
+        pub fn device_indices(mut self, device_indices: &'a [u32]) -> Self {
+            self.device_index_count = device_indices.len() as _;
+            self.p_device_indices = device_indices.as_ptr();
             self
         }
         pub fn split_instance_bind_region_count(
@@ -1809,13 +1809,13 @@ pub(crate) mod reexport {
             self.split_instance_bind_region_count = split_instance_bind_region_count;
             self
         }
-        pub fn p_split_instance_bind_regions(
+        pub fn split_instance_bind_regions(
             mut self,
-            p_split_instance_bind_regions: &'a [crate::vk::Rect2D],
+            split_instance_bind_regions: &'a [crate::vk::Rect2D],
         ) -> Self {
-            self.split_instance_bind_region_count = p_split_instance_bind_regions.len()
+            self.split_instance_bind_region_count = split_instance_bind_regions.len()
                 as _;
-            self.p_split_instance_bind_regions = p_split_instance_bind_regions.as_ptr();
+            self.p_split_instance_bind_regions = split_instance_bind_regions.as_ptr();
             self
         }
     }
@@ -1860,12 +1860,12 @@ pub(crate) mod reexport {
             self.device_render_area_count = device_render_area_count;
             self
         }
-        pub fn p_device_render_areas(
+        pub fn device_render_areas(
             mut self,
-            p_device_render_areas: &'a [crate::vk::Rect2D],
+            device_render_areas: &'a [crate::vk::Rect2D],
         ) -> Self {
-            self.device_render_area_count = p_device_render_areas.len() as _;
-            self.p_device_render_areas = p_device_render_areas.as_ptr();
+            self.device_render_area_count = device_render_areas.len() as _;
+            self.p_device_render_areas = device_render_areas.as_ptr();
             self
         }
     }
@@ -1937,12 +1937,12 @@ pub(crate) mod reexport {
             self.wait_semaphore_count = wait_semaphore_count;
             self
         }
-        pub fn p_wait_semaphore_device_indices(
+        pub fn wait_semaphore_device_indices(
             mut self,
-            p_wait_semaphore_device_indices: &'a [u32],
+            wait_semaphore_device_indices: &'a [u32],
         ) -> Self {
-            self.wait_semaphore_count = p_wait_semaphore_device_indices.len() as _;
-            self.p_wait_semaphore_device_indices = p_wait_semaphore_device_indices
+            self.wait_semaphore_count = wait_semaphore_device_indices.len() as _;
+            self.p_wait_semaphore_device_indices = wait_semaphore_device_indices
                 .as_ptr();
             self
         }
@@ -1950,24 +1950,24 @@ pub(crate) mod reexport {
             self.command_buffer_count = command_buffer_count;
             self
         }
-        pub fn p_command_buffer_device_masks(
+        pub fn command_buffer_device_masks(
             mut self,
-            p_command_buffer_device_masks: &'a [u32],
+            command_buffer_device_masks: &'a [u32],
         ) -> Self {
-            self.command_buffer_count = p_command_buffer_device_masks.len() as _;
-            self.p_command_buffer_device_masks = p_command_buffer_device_masks.as_ptr();
+            self.command_buffer_count = command_buffer_device_masks.len() as _;
+            self.p_command_buffer_device_masks = command_buffer_device_masks.as_ptr();
             self
         }
         pub fn signal_semaphore_count(mut self, signal_semaphore_count: u32) -> Self {
             self.signal_semaphore_count = signal_semaphore_count;
             self
         }
-        pub fn p_signal_semaphore_device_indices(
+        pub fn signal_semaphore_device_indices(
             mut self,
-            p_signal_semaphore_device_indices: &'a [u32],
+            signal_semaphore_device_indices: &'a [u32],
         ) -> Self {
-            self.signal_semaphore_count = p_signal_semaphore_device_indices.len() as _;
-            self.p_signal_semaphore_device_indices = p_signal_semaphore_device_indices
+            self.signal_semaphore_count = signal_semaphore_device_indices.len() as _;
+            self.p_signal_semaphore_device_indices = signal_semaphore_device_indices
                 .as_ptr();
             self
         }
@@ -2037,12 +2037,12 @@ pub(crate) mod reexport {
             self.physical_device_count = physical_device_count;
             self
         }
-        pub fn p_physical_devices(
+        pub fn physical_devices(
             mut self,
-            p_physical_devices: &'a [crate::vk::PhysicalDevice],
+            physical_devices: &'a [crate::vk::PhysicalDevice],
         ) -> Self {
-            self.physical_device_count = p_physical_devices.len() as _;
-            self.p_physical_devices = p_physical_devices.as_ptr();
+            self.physical_device_count = physical_devices.len() as _;
+            self.p_physical_devices = physical_devices.as_ptr();
             self
         }
     }
@@ -2136,12 +2136,12 @@ pub(crate) mod reexport {
             self.descriptor_update_entry_count = descriptor_update_entry_count;
             self
         }
-        pub fn p_descriptor_update_entries(
+        pub fn descriptor_update_entries(
             mut self,
-            p_descriptor_update_entries: &'a [crate::vk::DescriptorUpdateTemplateEntry],
+            descriptor_update_entries: &'a [crate::vk::DescriptorUpdateTemplateEntry],
         ) -> Self {
-            self.descriptor_update_entry_count = p_descriptor_update_entries.len() as _;
-            self.p_descriptor_update_entries = p_descriptor_update_entries.as_ptr();
+            self.descriptor_update_entry_count = descriptor_update_entries.len() as _;
+            self.p_descriptor_update_entries = descriptor_update_entries.as_ptr();
             self
         }
         pub fn template_type(
@@ -2229,12 +2229,12 @@ pub(crate) mod reexport {
             self.aspect_reference_count = aspect_reference_count;
             self
         }
-        pub fn p_aspect_references(
+        pub fn aspect_references(
             mut self,
-            p_aspect_references: &'a [crate::vk::InputAttachmentAspectReference],
+            aspect_references: &'a [crate::vk::InputAttachmentAspectReference],
         ) -> Self {
-            self.aspect_reference_count = p_aspect_references.len() as _;
-            self.p_aspect_references = p_aspect_references.as_ptr();
+            self.aspect_reference_count = aspect_references.len() as _;
+            self.p_aspect_references = aspect_references.as_ptr();
             self
         }
     }
@@ -2784,7 +2784,7 @@ pub(crate) mod reexport {
     pub struct BindImagePlaneMemoryInfo<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub plane_aspect: crate::vk::ImageAspectFlagBits,
+        pub plane_aspect: crate::vk::ImageAspectFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for BindImagePlaneMemoryInfo<'a> {
@@ -2805,7 +2805,7 @@ pub(crate) mod reexport {
     impl<'a> BindImagePlaneMemoryInfo<'a> {
         pub fn plane_aspect(
             mut self,
-            plane_aspect: crate::vk::ImageAspectFlagBits,
+            plane_aspect: crate::vk::ImageAspectFlags,
         ) -> Self {
             self.plane_aspect = plane_aspect;
             self
@@ -2816,7 +2816,7 @@ pub(crate) mod reexport {
     pub struct ImagePlaneMemoryRequirementsInfo<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
-        pub plane_aspect: crate::vk::ImageAspectFlagBits,
+        pub plane_aspect: crate::vk::ImageAspectFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a> for ImagePlaneMemoryRequirementsInfo<'a> {
@@ -2837,7 +2837,7 @@ pub(crate) mod reexport {
     impl<'a> ImagePlaneMemoryRequirementsInfo<'a> {
         pub fn plane_aspect(
             mut self,
-            plane_aspect: crate::vk::ImageAspectFlagBits,
+            plane_aspect: crate::vk::ImageAspectFlags,
         ) -> Self {
             self.plane_aspect = plane_aspect;
             self

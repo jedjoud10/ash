@@ -96,7 +96,7 @@ pub(crate) mod reexport {
     pub struct PhysicalDeviceFragmentShadingRateEnumsPropertiesNV<'a> {
         pub s_type: crate::vk::StructureType,
         pub p_next: *mut core::ffi::c_void,
-        pub max_fragment_shading_rate_invocation_count: crate::vk::SampleCountFlagBits,
+        pub max_fragment_shading_rate_invocation_count: crate::vk::SampleCountFlags,
         pub _marker: ::core::marker::PhantomData<&'a ()>,
     }
     unsafe impl<'a> crate::TaggedStructure<'a>
@@ -118,7 +118,7 @@ pub(crate) mod reexport {
     impl<'a> PhysicalDeviceFragmentShadingRateEnumsPropertiesNV<'a> {
         pub fn max_fragment_shading_rate_invocation_count(
             mut self,
-            max_fragment_shading_rate_invocation_count: crate::vk::SampleCountFlagBits,
+            max_fragment_shading_rate_invocation_count: crate::vk::SampleCountFlags,
         ) -> Self {
             self.max_fragment_shading_rate_invocation_count = max_fragment_shading_rate_invocation_count;
             self

@@ -51,6 +51,16 @@ pub(crate) fn escape_ident(name: &str) -> Ident {
     syn::parse_str(name).unwrap_or_else(|_| format_ident!("_{name}"))
 }
 
+pub(crate) fn trim_p_pps(name: &str) -> String {
+    let trimmed = name.trim_start_matches("p_").trim_start_matches("pp_");
+
+    if name == "pp_usage_counts" || name == "pp_geometries" {
+        format!("{}_ptrs", trimmed)
+    } else {
+        trimmed.to_string()
+    }
+}
+
 #[derive(Debug)]
 pub struct Context<'a>(&'a AnalysisResult);
 
@@ -67,7 +77,22 @@ impl<'a> RustTranslator for Context<'a> {
         crate::escape_ident(&name.original().to_snek_case())
     }
 
+    fn trimmed_var_name_to_rust(&self, name: VariableName) -> Ident {
+        crate::escape_ident(&crate::trim_p_pps(&name.original().to_snek_case()))
+    }
+
     fn type_to_rust(&self, name: TypeName, qualified: bool, lifetime: &Lifetime) -> TokenStream {
+        let type_item = &self.items.types[&name];
+        let required_by = type_item.required_by(&self.items);
+        let ident: Ident = syn::parse_str(&name.prefix_trimmed(required_by.library).to_string().replace("FlagBits", "Flags")).unwrap();
+        let path = qualified.then(|| quote! { crate::vk:: });
+        let lifetime = self.type_has_lifetime(name).then(|| quote! { <#lifetime> });
+        quote! { #path #ident #lifetime }
+    }
+
+    // duplicate of type_to_rust but does not have the FlagsBits -> Flags replacement
+    // that could have been passed as argument but that would require changing fn signature everywhere  
+    fn type_to_rust_without_bit_flags_replacement(&self, name: TypeName, qualified: bool, lifetime: &Lifetime) -> TokenStream {
         let type_item = &self.items.types[&name];
         let required_by = type_item.required_by(&self.items);
         let ident: Ident = syn::parse_str(name.prefix_trimmed(required_by.library)).unwrap();

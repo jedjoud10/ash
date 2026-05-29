@@ -72,7 +72,7 @@ impl DeviceFn {
                 unsafe extern "system" fn get_swapchain_counter_ext(
                     _: crate::vk::Device,
                     _: crate::vk::SwapchainKHR,
-                    _: crate::vk::SurfaceCounterFlagBitsEXT,
+                    _: crate::vk::SurfaceCounterFlagsEXT,
                     _: *mut u64,
                 ) -> crate::vk::Result {
                     panic!("unable to load vkGetSwapchainCounterEXT")
@@ -288,7 +288,7 @@ pub(crate) mod reexport {
     pub type PFN_vkGetSwapchainCounterEXT = unsafe extern "system" fn(
         device: crate::vk::Device,
         swapchain: crate::vk::SwapchainKHR,
-        counter: crate::vk::SurfaceCounterFlagBitsEXT,
+        counter: crate::vk::SurfaceCounterFlagsEXT,
         p_counter_value: *mut u64,
     ) -> crate::vk::Result;
     pub const EXT_DISPLAY_CONTROL_SPEC_VERSION: u32 = 1;

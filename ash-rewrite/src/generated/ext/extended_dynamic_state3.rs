@@ -92,7 +92,7 @@ impl DeviceFn {
             cmd_set_rasterization_samples_ext: unsafe {
                 unsafe extern "system" fn cmd_set_rasterization_samples_ext(
                     _: crate::vk::CommandBuffer,
-                    _: crate::vk::SampleCountFlagBits,
+                    _: crate::vk::SampleCountFlags,
                 ) {
                     panic!("unable to load vkCmdSetRasterizationSamplesEXT")
                 }
@@ -106,7 +106,7 @@ impl DeviceFn {
             cmd_set_sample_mask_ext: unsafe {
                 unsafe extern "system" fn cmd_set_sample_mask_ext(
                     _: crate::vk::CommandBuffer,
-                    _: crate::vk::SampleCountFlagBits,
+                    _: crate::vk::SampleCountFlags,
                     _: *const crate::vk::SampleMask,
                 ) {
                     panic!("unable to load vkCmdSetSampleMaskEXT")
@@ -1009,11 +1009,11 @@ pub(crate) mod reexport {
     );
     pub type PFN_vkCmdSetRasterizationSamplesEXT = unsafe extern "system" fn(
         command_buffer: crate::vk::CommandBuffer,
-        rasterization_samples: crate::vk::SampleCountFlagBits,
+        rasterization_samples: crate::vk::SampleCountFlags,
     );
     pub type PFN_vkCmdSetSampleMaskEXT = unsafe extern "system" fn(
         command_buffer: crate::vk::CommandBuffer,
-        samples: crate::vk::SampleCountFlagBits,
+        samples: crate::vk::SampleCountFlags,
         p_sample_mask: *const crate::vk::SampleMask,
     );
     pub type PFN_vkCmdSetAlphaToCoverageEnableEXT = unsafe extern "system" fn(

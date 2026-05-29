@@ -21,7 +21,7 @@ impl DeviceFn {
             cmd_write_buffer_marker_amd: unsafe {
                 unsafe extern "system" fn cmd_write_buffer_marker_amd(
                     _: crate::vk::CommandBuffer,
-                    _: crate::vk::PipelineStageFlagBits,
+                    _: crate::vk::PipelineStageFlags,
                     _: crate::vk::Buffer,
                     _: crate::vk::DeviceSize,
                     _: u32,
@@ -58,7 +58,7 @@ impl DeviceFn {
 pub(crate) mod reexport {
     pub type PFN_vkCmdWriteBufferMarkerAMD = unsafe extern "system" fn(
         command_buffer: crate::vk::CommandBuffer,
-        pipeline_stage: crate::vk::PipelineStageFlagBits,
+        pipeline_stage: crate::vk::PipelineStageFlags,
         dst_buffer: crate::vk::Buffer,
         dst_offset: crate::vk::DeviceSize,
         marker: u32,

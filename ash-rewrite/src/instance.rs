@@ -532,7 +532,7 @@ impl Instance {
         physical_device: vk::PhysicalDevice,
         format: vk::Format,
         typ: vk::ImageType,
-        samples: vk::SampleCountFlagBits,
+        samples: vk::SampleCountFlags, // what again?
         usage: vk::ImageUsageFlags,
         tiling: vk::ImageTiling,
     ) -> Vec<vk::SparseImageFormatProperties> {

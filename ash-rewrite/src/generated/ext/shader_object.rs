@@ -73,7 +73,7 @@ impl DeviceFn {
                 unsafe extern "system" fn cmd_bind_shaders_ext(
                     _: crate::vk::CommandBuffer,
                     _: u32,
-                    _: *const crate::vk::ShaderStageFlagBits,
+                    _: *const crate::vk::ShaderStageFlags,
                     _: *const crate::vk::ShaderEXT,
                 ) {
                     panic!("unable to load vkCmdBindShadersEXT")
@@ -181,7 +181,7 @@ pub(crate) mod reexport {
         pub s_type: crate::vk::StructureType,
         pub p_next: *const core::ffi::c_void,
         pub flags: crate::vk::ShaderCreateFlagsEXT,
-        pub stage: crate::vk::ShaderStageFlagBits,
+        pub stage: crate::vk::ShaderStageFlags,
         pub next_stage: crate::vk::ShaderStageFlags,
         pub code_type: crate::vk::ShaderCodeTypeEXT,
         pub code_size: usize,
@@ -223,7 +223,7 @@ pub(crate) mod reexport {
             self.flags = flags;
             self
         }
-        pub fn stage(mut self, stage: crate::vk::ShaderStageFlagBits) -> Self {
+        pub fn stage(mut self, stage: crate::vk::ShaderStageFlags) -> Self {
             self.stage = stage;
             self
         }
@@ -239,16 +239,16 @@ pub(crate) mod reexport {
             self.code_size = code_size;
             self
         }
-        pub fn p_code(mut self, p_code: &'a [u8]) -> Self {
-            self.code_size = p_code.len() as _;
-            self.p_code = p_code.as_ptr().cast();
+        pub fn code(mut self, code: &'a [u8]) -> Self {
+            self.code_size = code.len() as _;
+            self.p_code = code.as_ptr().cast();
             self
         }
-        pub fn p_name(mut self, p_name: &'a core::ffi::CStr) -> Self {
-            self.p_name = p_name.as_ptr();
+        pub fn name(mut self, name: &'a core::ffi::CStr) -> Self {
+            self.p_name = name.as_ptr();
             self
         }
-        pub unsafe fn p_name_as_c_str(&self) -> Option<&core::ffi::CStr> {
+        pub unsafe fn name_as_c_str(&self) -> Option<&core::ffi::CStr> {
             if self.p_name.is_null() {
                 None
             } else {
@@ -259,12 +259,12 @@ pub(crate) mod reexport {
             self.set_layout_count = set_layout_count;
             self
         }
-        pub fn p_set_layouts(
+        pub fn set_layouts(
             mut self,
-            p_set_layouts: &'a [crate::vk::DescriptorSetLayout],
+            set_layouts: &'a [crate::vk::DescriptorSetLayout],
         ) -> Self {
-            self.set_layout_count = p_set_layouts.len() as _;
-            self.p_set_layouts = p_set_layouts.as_ptr();
+            self.set_layout_count = set_layouts.len() as _;
+            self.p_set_layouts = set_layouts.as_ptr();
             self
         }
         pub fn push_constant_range_count(
@@ -274,19 +274,19 @@ pub(crate) mod reexport {
             self.push_constant_range_count = push_constant_range_count;
             self
         }
-        pub fn p_push_constant_ranges(
+        pub fn push_constant_ranges(
             mut self,
-            p_push_constant_ranges: &'a [crate::vk::PushConstantRange],
+            push_constant_ranges: &'a [crate::vk::PushConstantRange],
         ) -> Self {
-            self.push_constant_range_count = p_push_constant_ranges.len() as _;
-            self.p_push_constant_ranges = p_push_constant_ranges.as_ptr();
+            self.push_constant_range_count = push_constant_ranges.len() as _;
+            self.p_push_constant_ranges = push_constant_ranges.as_ptr();
             self
         }
-        pub fn p_specialization_info(
+        pub fn specialization_info(
             mut self,
-            p_specialization_info: &'a crate::vk::SpecializationInfo<'a>,
+            specialization_info: &'a crate::vk::SpecializationInfo<'a>,
         ) -> Self {
-            self.p_specialization_info = p_specialization_info;
+            self.p_specialization_info = specialization_info;
             self
         }
     }
@@ -487,7 +487,7 @@ pub(crate) mod reexport {
     pub type PFN_vkCmdBindShadersEXT = unsafe extern "system" fn(
         command_buffer: crate::vk::CommandBuffer,
         stage_count: u32,
-        p_stages: *const crate::vk::ShaderStageFlagBits,
+        p_stages: *const crate::vk::ShaderStageFlags,
         p_shaders: *const crate::vk::ShaderEXT,
     );
     pub type PFN_vkCmdSetDepthClampRangeEXT = unsafe extern "system" fn(
