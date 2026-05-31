@@ -261,6 +261,7 @@ impl Items {
                 |xml| FuncPointer::new(&require_map, xml),
             );
 
+            // TODO: is there a way to recognize *_SPEC_VERSION and *_NAME constants so that we can re-export them as simply SPEC_VERSION and NAME?
             Items::collect_item(&mut items.constants, &library.xml.constants, |xml| {
                 Constant::from_base_constant(&require_map, xml)
             });

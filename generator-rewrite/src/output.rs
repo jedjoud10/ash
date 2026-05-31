@@ -236,6 +236,7 @@ impl CodeMap {
             pub use crate::Handle; 
             pub use crate::TaggedStructure;
             pub use crate::Extends;
+            pub use crate::platform_types::*;
         });
         vfs.sync_to(output_path)
     }

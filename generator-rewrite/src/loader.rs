@@ -65,6 +65,28 @@ impl FunctionType {
             }
         }
     }
+
+    fn loader_name(self, dest: Destination) -> Ident {
+        match (self, dest.location) {
+            (FunctionType::Static, ..) => format_ident!("Static"),
+            (FunctionType::Entry, RequireLocation::Core { major, minor }) => {
+                format_ident!("EntryV{major}_{minor}")
+            }
+            (FunctionType::Entry, RequireLocation::Extension { .. }) => format_ident!("Entry"),
+            (FunctionType::Instance, RequireLocation::Core { major, minor }) => {
+                format_ident!("InstanceV{major}_{minor}")
+            }
+            (FunctionType::Instance, RequireLocation::Extension { .. }) => {
+                format_ident!("Instance")
+            }
+            (FunctionType::Device, RequireLocation::Core { major, minor }) => {
+                format_ident!("DeviceV{major}_{minor}")
+            }
+            (FunctionType::Device, RequireLocation::Extension { .. }) => {
+                format_ident!("Device")
+            }
+        }
+    }
 }
 
 pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
@@ -128,7 +150,9 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
 
     for (&(function_type, dest), Table { fields, loaders }) in tables.iter() {
         let table_name = function_type.table_name(dest);
-        let code = quote! {
+        let loader_name = function_type.loader_name(dest);
+
+        let mut code = quote! {
             #[derive(Clone)]
             pub struct #table_name {
                 #fields
@@ -146,6 +170,70 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
                     Self { #loaders }
                 }
             }
+        };
+
+        match function_type {
+            FunctionType::Instance => {
+                let extra = quote! {
+                    #[derive(Clone)]
+                    pub struct #loader_name {
+                        pub(crate) fp: #table_name,
+                        pub(crate) handle: crate::vk::Instance,
+                    }
+                
+                    impl #loader_name {
+                        pub fn load(entry: &crate::Entry, instance: &crate::Instance) -> Self {
+                            let handle = instance.handle;
+                            let fp = #table_name::load(|name| unsafe {
+                                core::mem::transmute(entry.get_instance_proc_addr(handle, name.as_ptr()))
+                            });
+                            Self { handle, fp }
+                        }
+                    
+                        #[inline]
+                        pub fn fp(&self) -> &#table_name {
+                            &self.fp
+                        }
+                    
+                        #[inline]
+                        pub fn instance(&self) -> crate::vk::Instance {
+                            self.handle
+                        }
+                    }
+                };
+
+                code.extend(extra);
+            },
+            FunctionType::Device => {
+                let extra = quote! {
+                    #[derive(Clone)]
+                    pub struct #loader_name {
+                        pub(crate) fp: #table_name,
+                        pub(crate) handle: crate::vk::Device,
+                    }
+                
+                    impl #loader_name {
+                        pub fn load(instance: &crate::Instance, device: &crate::Device) -> Self {
+                            let handle = device.handle;
+                            let fp = #table_name::load(|name| unsafe {
+                                core::mem::transmute(instance.get_device_proc_addr(handle, name.as_ptr()))
+                            });
+                            Self { handle, fp }
+                        }
+                        #[inline]
+                        pub fn fp(&self) -> &#table_name {
+                            &self.fp
+                        }
+                        #[inline]
+                        pub fn device(&self) -> crate::vk::Device {
+                            self.handle
+                        }
+                    }
+                };
+
+                code.extend(extra);
+            },
+            _ => {}
         };
 
         codemap.extend(CodeMap::new(dest, code));
