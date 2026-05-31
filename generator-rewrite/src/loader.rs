@@ -1,6 +1,6 @@
 use crate::{
     Context,
-    output::{CodeMap, Destination},
+    output::{CodeMap, Destination, SingleDestination},
 };
 use analysis::{
     decl::Ty,
@@ -44,7 +44,7 @@ impl FunctionType {
         }
     }
 
-    fn table_name(self, dest: Destination) -> Ident {
+    fn table_name(self, dest: SingleDestination) -> Ident {
         match (self, dest.location) {
             (FunctionType::Static, ..) => format_ident!("StaticFn"),
             (FunctionType::Entry, RequireLocation::Core { major, minor }) => {
@@ -66,7 +66,7 @@ impl FunctionType {
         }
     }
 
-    fn loader_name(self, dest: Destination) -> Ident {
+    fn loader_name(self, dest: SingleDestination) -> Ident {
         match (self, dest.location) {
             (FunctionType::Static, ..) => format_ident!("Static"),
             (FunctionType::Entry, RequireLocation::Core { major, minor }) => {
@@ -98,7 +98,7 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
         loaders: TokenStream,
     }
 
-    let mut tables: IndexMap<(FunctionType, Destination), Table> = Default::default();
+    let mut tables: IndexMap<(FunctionType, SingleDestination), Table> = Default::default();
     for command_item in ctx.items.commands.values() {
         let (name, required_by, command) = match command_item {
             CommandItem::Alias(alias) => match &ctx.items.commands[&alias.alias] {
@@ -108,49 +108,51 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
             CommandItem::Command(command) => (command.name, command.required_by, command),
         };
 
-        let function_type = FunctionType::of_command(command);
         let mut dest = Destination::new(required_by);
         dest.reexport = false;
-        let table = tables.entry((function_type, dest)).or_default();
+        
+        for single_destination in dest.single_dests() {
+            let function_type = FunctionType::of_command(command);
+            let table = tables.entry((function_type, single_destination)).or_default();
 
-        let field_name = format_ident!("{}", name.prefix_trimmed().to_snek_case());
-        let command_ty = ctx.command_to_rust(name, true);
-        table.fields.extend(quote! {
-            pub #field_name: #command_ty,
-        });
+            let field_name = format_ident!("{}", name.prefix_trimmed().to_snek_case());
+            let command_ty = ctx.command_to_rust(name, true);
+            table.fields.extend(quote! {
+                pub #field_name: #command_ty,
+            });
 
-        let panic_msg = format!("unable to load {}", name.original());
-        let cstr = Literal::c_string(&CString::new(name.original()).unwrap());
+            let panic_msg = format!("unable to load {}", name.original());
+            let cstr = Literal::c_string(&CString::new(name.original()).unwrap());
 
-        let params = command.params.iter().map(|param| {
-            let ty = param.decl.ty.to_rust(ctx, &Lifetime::placeholder());
-            quote! { _: #ty }
-        });
+            let params = command.params.iter().map(|param| {
+                let ty = param.decl.ty.to_rust(ctx, &Lifetime::placeholder());
+                quote! { _: #ty }
+            });
 
-        let ret = command.return_type.as_ref().map(|ty| {
-            let rust_ty = ty.to_rust(ctx, &Lifetime::placeholder());
-            quote! { -> #rust_ty }
-        });
+            let ret = command.return_type.as_ref().map(|ty| {
+                let rust_ty = ty.to_rust(ctx, &Lifetime::placeholder());
+                quote! { -> #rust_ty }
+            });
 
-        table.loaders.extend(quote! {
-            #field_name: unsafe {
-                unsafe extern "system" fn #field_name( #( #params ),* ) #ret {
-                    panic!(#panic_msg)
-                }
+            table.loaders.extend(quote! {
+                #field_name: unsafe {
+                    unsafe extern "system" fn #field_name( #( #params ),* ) #ret {
+                        panic!(#panic_msg)
+                    }
 
-                let val = _f(#cstr);
-                if val.is_null() {
-                    #field_name
-                } else {
-                    ::core::mem::transmute(val)
-                }
-            },
-        });
+                    let val = _f(#cstr);
+                    if val.is_null() {
+                        #field_name
+                    } else {
+                        ::core::mem::transmute(val)
+                    }
+                },
+            });
+        }
     }
 
     for (&(function_type, dest), Table { fields, loaders }) in tables.iter() {
         let table_name = function_type.table_name(dest);
-        let loader_name = function_type.loader_name(dest);
 
         let mut code = quote! {
             #[derive(Clone)]
@@ -171,6 +173,9 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
                 }
             }
         };
+        
+        let loader_name = function_type.loader_name(dest);
+
 
         match function_type {
             FunctionType::Instance => {
@@ -235,7 +240,8 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
             },
             _ => {}
         };
-
+        
         codemap.extend(CodeMap::new(dest, code));
+        
     }
 }

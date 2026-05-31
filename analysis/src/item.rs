@@ -32,6 +32,8 @@ use std::{
 use tinyvec::{ArrayVec, array_vec};
 use tracing::debug;
 
+pub type MultiRequireLocation = ArrayVec<[RequireLocation; 4]>;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct RequiredBy {
     pub library: LibraryName,
@@ -39,10 +41,6 @@ pub struct RequiredBy {
 }
 
 impl RequiredBy {
-    pub fn primary_location(&self) -> RequireLocation {
-        self.locations[0]
-    }
-
     pub fn merge(&mut self, other: RequiredBy) {
         assert_eq!(self.library, other.library);
         for location in &other.locations {

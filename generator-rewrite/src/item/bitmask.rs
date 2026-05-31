@@ -134,7 +134,8 @@ impl Code for BitMask {
             #bits_code
         };
 
-        let mut codemap = CodeMap::new(Destination::new(self.required_by), code);
+        let guessed_primary = Destination::new(self.required_by).guess_primary();
+        let mut codemap = CodeMap::new(guessed_primary, code);
 
         if let Some(bits_name) = self.bits_name {
             let mut impl_map = CodeMap::default();
@@ -157,7 +158,7 @@ impl Code for BitMask {
                 };
 
                 impl_map.extend(CodeMap::new(
-                    Destination::new(*required_by),
+                    Destination::new(*required_by).guess_primary(),
                     quote! { pub const #name: Self = #value; },
                 ));
             }
@@ -165,7 +166,7 @@ impl Code for BitMask {
             for (&dest, impl_tokens) in impl_map.iter() {
                 let name = ctx.type_to_rust_without_bit_flags_replacement(
                     bits_name,
-                    dest != Destination::new(self.required_by),
+                    dest != guessed_primary,
                     &Lifetime::placeholder(),
                 );
 

@@ -23,7 +23,7 @@ impl Code for TypeAlias {
             pub type #name = #alias;
         };
 
-        CodeMap::new(Destination::new(self.required_by), code)
+        CodeMap::new_from_primary(Destination::new(self.required_by), code)
     }
 }
 
@@ -37,6 +37,6 @@ impl Code for CommandAlias {
             pub type #name = #alias;
         };
 
-        CodeMap::new(Destination::new(self.required_by), code)
+        CodeMap::new_from_primary(Destination::new(self.required_by), code)
     }
 }

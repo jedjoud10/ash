@@ -18,6 +18,6 @@ impl Code for BaseType {
             pub type #name = #ty;
         };
 
-        CodeMap::new(Destination::new(self.required_by), code)
+        CodeMap::new_from_primary(Destination::new(self.required_by), code)
     }
 }
