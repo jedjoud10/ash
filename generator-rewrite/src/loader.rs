@@ -9,7 +9,7 @@ use analysis::{
     name::{CommandName, TypeName},
     to_rust::RustTranslator,
 };
-use heck::ToSnekCase;
+use heck::{ToSnekCase, ToUpperCamelCase};
 use indexmap::IndexMap;
 use proc_macro2::{Literal, TokenStream};
 use quote::{format_ident, quote};
@@ -96,6 +96,7 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
     struct Table {
         fields: TokenStream,
         loaders: TokenStream,
+        trait_impls: TokenStream
     }
 
     let mut tables: IndexMap<(FunctionType, SingleDestination), Table> = Default::default();
@@ -115,7 +116,13 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
             let function_type = FunctionType::of_command(command);
             let table = tables.entry((function_type, single_destination)).or_default();
 
+
             let field_name = format_ident!("{}", name.prefix_trimmed().to_snek_case());
+            
+            // TODO: definitely not the place for this but I did not want to modify RustTranslator and Context for this
+            // idk where to put this instead....
+            let command_name_ident: Ident = syn::parse_str(&format!("PFN_{}", name.original())).unwrap();
+
             let command_ty = ctx.command_to_rust(name, true);
             table.fields.extend(quote! {
                 pub #field_name: #command_ty,
@@ -148,10 +155,40 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
                     }
                 },
             });
+
+            for param in command.params.iter() {
+                if !param.struct_impls_traits.is_empty() {
+                    let param_ident = crate::trim_p_pps(&param.decl.name.original().to_snek_case());
+
+
+                    let param_trait_name = format_ident!(
+                        "{}Param{}",
+                        name.prefix_trimmed(),
+                        param_ident.to_upper_camel_case(),
+                    );
+
+                    let doc_string = format!(
+                        "Implemented for all types that can be passed as argument to `{}` in [`{}`]",
+                        param_ident, command_name_ident
+                    );
+
+                    table.trait_impls.extend(quote! {
+                        #[doc = #doc_string]
+                        unsafe trait #param_trait_name {}
+                    });
+                
+                    for struct_type_to_impl in param.struct_impls_traits.iter() {
+                        let ty = struct_type_to_impl.to_rust(ctx, &Lifetime::placeholder());
+                        table.trait_impls.extend(quote! {
+                            unsafe impl #param_trait_name for #ty {}
+                        });
+                    }
+                }
+            }            
         }
     }
 
-    for (&(function_type, dest), Table { fields, loaders }) in tables.iter() {
+    for ((function_type, dest), Table { fields, loaders, trait_impls }) in tables.into_iter() {
         let table_name = function_type.table_name(dest);
 
         let mut code = quote! {
@@ -240,6 +277,8 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
             },
             _ => {}
         };
+
+        code.extend(trait_impls);
         
         codemap.extend(CodeMap::new(dest, code));
         
