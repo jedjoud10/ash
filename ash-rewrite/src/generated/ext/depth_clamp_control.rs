@@ -133,6 +133,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct DepthClampRangeEXT {
         pub min_depth_clamp: core::ffi::c_float,

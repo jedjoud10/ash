@@ -114,6 +114,7 @@ impl Instance {
 }
 pub(crate) mod reexport {
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct SampleLocationEXT {
         pub x: core::ffi::c_float,

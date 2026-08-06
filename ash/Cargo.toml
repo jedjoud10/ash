@@ -39,6 +39,7 @@ debug = []
 std = []
 # Enable provisional Vulkan extensions. May see *semver-breaking* code changes in non-breaking releases!
 provisional = []
+bytemuck = []
 
 [package.metadata.release]
 no-dev-version = true

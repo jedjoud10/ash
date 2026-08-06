@@ -698,6 +698,7 @@ impl<'a> VideoEncodeAV1RateControlInfoKHR<'a> {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct VideoEncodeAV1QIndexKHR {
     pub intra_q_index: u32,
@@ -719,6 +720,7 @@ impl VideoEncodeAV1QIndexKHR {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct VideoEncodeAV1FrameSizeKHR {
     pub intra_frame_size: u32,

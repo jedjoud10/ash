@@ -2,6 +2,7 @@
 #![cfg_attr(rustfmt, rustfmt_skip)]
 //!Items provided by `vulkan_video_codec_h265std_encode`
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeH265WeightTableFlags {
     pub luma_weight_l0_flag: u16,
@@ -207,6 +208,7 @@ impl EncodeH265LongTermRefPics {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeH265SliceSegmentHeaderFlags {
     /**- `first_slice_segment_in_pic_flag` @ `0..1`
@@ -396,6 +398,7 @@ impl<'a> EncodeH265SliceSegmentHeader<'a> {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeH265ReferenceListsInfoFlags {
     /**- `ref_pic_list_modification_flag_l0` @ `0..1`
@@ -494,6 +497,7 @@ impl EncodeH265ReferenceListsInfo {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeH265PictureInfoFlags {
     /**- `is_reference` @ `0..1`
@@ -662,6 +666,7 @@ impl<'a> EncodeH265PictureInfo<'a> {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeH265ReferenceInfoFlags {
     /**- `used_for_long_term_reference` @ `0..1`

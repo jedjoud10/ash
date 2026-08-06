@@ -82,6 +82,7 @@ impl Device {
 }
 pub(crate) mod reexport {
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct MultiDrawInfoEXT {
         pub first_vertex: u32,
@@ -98,6 +99,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct MultiDrawIndexedInfoEXT {
         pub first_index: u32,

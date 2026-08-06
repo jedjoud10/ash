@@ -22,6 +22,7 @@ rust-version = "1.69.0"
 
 [dependencies]
 libloading = { version = "0.8", optional = true }
+bytemuck = { version = "1.25.2", features = ["derive"], optional = true }
 
 [features]
 default = ["loaded", "debug", "std"]

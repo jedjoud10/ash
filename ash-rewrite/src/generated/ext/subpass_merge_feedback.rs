@@ -33,6 +33,7 @@ impl<'a> RenderPassCreationControlEXT<'a> {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct RenderPassCreationFeedbackInfoEXT {
     pub post_merge_subpass_count: u32,

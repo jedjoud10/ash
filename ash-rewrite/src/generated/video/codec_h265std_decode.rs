@@ -2,6 +2,7 @@
 #![cfg_attr(rustfmt, rustfmt_skip)]
 //!Items provided by `vulkan_video_codec_h265std_decode`
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct DecodeH265PictureInfoFlags {
     /**- `IrapPicFlag` @ `0..1`
@@ -135,6 +136,7 @@ impl DecodeH265PictureInfo {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct DecodeH265ReferenceInfoFlags {
     /**- `used_for_long_term_reference` @ `0..1`

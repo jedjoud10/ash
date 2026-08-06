@@ -28,6 +28,10 @@ impl Code for Struct {
             .then(|| quote! { #lifetime });
         let mut bitfield_i = 0;
 
+        let mut can_bytemuck = true;
+
+        let mut pod_fields_alignment_and_size = Vec::<(usize, usize)>::new();
+
         let mut contains_static_array = false;
         let members = (self.members.iter()).map(|member| match member {
             StructMember::Normal(StructDecl { decl, .. }) => {
@@ -35,9 +39,15 @@ impl Code for Struct {
                     contains_static_array = true
                 }
 
+                can_bytemuck &= decl.ty.bytemuck_is_zeroable(&ctx.items);
+
+                if let Some(data) = decl.ty.get_alignment_and_size(&ctx.items){
+                    pod_fields_alignment_and_size.push(data);
+                }
+
                 let decl = decl.to_rust(ctx, &lifetime);
                 quote! { pub #decl }
-            }
+            },
             StructMember::BitField(ranges) => {
                 let doc: String = ranges
                     .iter()
@@ -92,6 +102,33 @@ impl Code for Struct {
             #tagged_structure
         };
 
+
+        // TODO: is this how you check if there's any padding bytes?
+        // idk, I came up with this on the spot. very doubtful that it works but it works fine so far
+        let max_alignment = pod_fields_alignment_and_size.iter().map(|(align, _)| *align).max().unwrap_or(0);
+        let mut missing_bytes = max_alignment;
+        for (_, size) in pod_fields_alignment_and_size {
+            let subbed = missing_bytes.checked_sub(size);
+
+            if let Some(subbed) = subbed {
+                missing_bytes = subbed;
+                if missing_bytes == 0 {
+                    missing_bytes = max_alignment;
+                }
+            } else {
+                can_bytemuck = false;
+                break;
+            }
+        }
+
+        can_bytemuck &= tagged_structure.is_none() && lifetime_marker.is_none();
+
+        let bytemuck = if can_bytemuck {
+            Some(quote! {
+                #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
+            })
+        } else { None };
+
         bitfield_i = 0;
         let default = if contains_static_array || tagged_structure.is_some() {
             let defaults = self.members.iter().map(|member| match member {
@@ -131,12 +168,13 @@ impl Code for Struct {
         };
 
         let derive_default = if default.is_none() {
-            Some(quote! {Default})
+            Some(quote! {Default, })
         } else {
             None
         };
 
         let derives = quote! {
+            #bytemuck
             #[derive(Clone, Copy, #derive_default)]
         };
 

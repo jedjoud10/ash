@@ -2,6 +2,7 @@
 #![cfg_attr(rustfmt, rustfmt_skip)]
 //!Items provided by `vulkan_video_codec_av1std_decode`
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct DecodeAV1PictureInfoFlags {
     /**- `error_resilient_mode` @ `0..1`
@@ -378,6 +379,7 @@ impl<'a> DecodeAV1PictureInfo<'a> {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct DecodeAV1ReferenceInfoFlags {
     /**- `disable_frame_end_update_cdf` @ `0..1`

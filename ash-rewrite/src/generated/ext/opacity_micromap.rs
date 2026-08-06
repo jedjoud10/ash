@@ -627,6 +627,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct MicromapUsageEXT {
         pub count: u32,
@@ -648,6 +649,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct MicromapTriangleEXT {
         pub data_offset: u32,

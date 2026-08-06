@@ -117,6 +117,7 @@ impl<'a> AccelerationStructureMotionInfoNV<'a> {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct SRTDataNV {
     pub sx: core::ffi::c_float,

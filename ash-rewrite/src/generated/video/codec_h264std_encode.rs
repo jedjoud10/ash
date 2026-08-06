@@ -2,6 +2,7 @@
 #![cfg_attr(rustfmt, rustfmt_skip)]
 //!Items provided by `vulkan_video_codec_h264std_encode`
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeH264WeightTableFlags {
     pub luma_weight_l0_flag: u32,
@@ -138,6 +139,7 @@ impl EncodeH264WeightTable {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeH264SliceHeaderFlags {
     /**- `direct_spatial_mv_pred_flag` @ `0..1`
@@ -164,6 +166,7 @@ impl EncodeH264SliceHeaderFlags {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeH264PictureInfoFlags {
     /**- `IdrPicFlag` @ `0..1`
@@ -208,6 +211,7 @@ impl EncodeH264PictureInfoFlags {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeH264ReferenceInfoFlags {
     ///- `used_for_long_term_reference` @ `0..1`
@@ -224,6 +228,7 @@ impl EncodeH264ReferenceInfoFlags {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeH264ReferenceListsInfoFlags {
     /**- `ref_pic_list_modification_flag_l0` @ `0..1`

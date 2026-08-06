@@ -1,10 +1,7 @@
 use proc_macro2::{Literal, TokenStream};
 
 use crate::{
-    item::{RequireMap, structure::Length},
-    name::{ConstantName, FuncPointerName, TypeName, VariableName},
-    to_rust::RustTranslator,
-    xml::{
+    item::{Items, RequireMap, structure::Length}, name::{ConstantName, FuncPointerName, TypeName, VariableName}, to_rust::RustTranslator, xml::{
         cdecl::{CArrayLen, CDecl, CType},
         cexpr::{self, CExprItem, CExprItems},
     },
@@ -153,4 +150,93 @@ impl Ty {
             CType::Func { .. } => unreachable!("unused after Vulkan-Headers 339"),
         }
     }
+
+    pub fn get_alignment_and_size(&self, items: &Items) -> Option<(usize, usize)> {
+        match &self {
+            Ty::CPrimary(cprimary_type) => match cprimary_type {
+                CPrimaryType::Float => Some((size_of::<f32>(), align_of::<f32>())),
+                CPrimaryType::Double => Some((size_of::<f64>(), align_of::<f64>())),
+                CPrimaryType::Int8 => Some((size_of::<i8>(), align_of::<i8>())),
+                CPrimaryType::UInt8 => Some((size_of::<u8>(), align_of::<u8>())),
+                CPrimaryType::Int16 => Some((size_of::<i16>(), align_of::<i16>())),
+                CPrimaryType::UInt16 => Some((size_of::<u16>(), align_of::<u16>())),
+                CPrimaryType::Int32 => Some((size_of::<i32>(), align_of::<i32>())),
+                CPrimaryType::UInt32 => Some((size_of::<u32>(), align_of::<u32>())),
+                CPrimaryType::Int64 => Some((size_of::<i64>(), align_of::<i64>())),
+                CPrimaryType::UInt64 => Some((size_of::<u64>(), align_of::<u64>())),
+                
+                // TODO: ummmm, what do here?
+                // usize is platform dependent... we can't assume that the size of usize is the same on the platform we're generating the code on and on the platform that's executing the vk code
+                CPrimaryType::Size => Some((size_of::<usize>(), align_of::<usize>())),
+
+                CPrimaryType::Int => Some((size_of::<u32>(), align_of::<u32>())),
+
+                _ => None
+            },
+            Ty::Array(ty, array_len) => {
+                let (inner_align, inner_size) = ty.get_alignment_and_size(items)?; 
+
+                let length = match array_len {
+                    ArrayLen::Constant(constant_name) => {
+                        let val = &items.constants[constant_name].value;
+                        match &val[0] {
+                            CExprItem::NumericLiteral(val) => val.parse::<usize>().unwrap(),
+                            CExprItem::U32ArgVar(val) => val.parse::<usize>().unwrap(),
+                            _ => 0,
+                        }
+                    },
+                    ArrayLen::Literal(x) => *x as usize,
+                };
+
+                Some((inner_align, inner_size * length))
+            }
+            _ => None
+        }
+    }
+
+    pub fn bytemuck_is_zeroable(&self, items: &Items) -> bool {
+        match &self {
+            Ty::SpecType(type_name) => false,
+            Ty::SpecFuncPointer(func_pointer_name) => false,
+            Ty::CPrimary(cprimary_type) => match cprimary_type {
+                CPrimaryType::Void => false,
+                CPrimaryType::Char => false,
+                CPrimaryType::Int => true,
+                CPrimaryType::Float => true,
+                CPrimaryType::Double => true,
+                CPrimaryType::Int8 => true,
+                CPrimaryType::UInt8 => true,
+                CPrimaryType::Int16 => true,
+                CPrimaryType::UInt16 => true,
+                CPrimaryType::Int32 => true,
+                CPrimaryType::UInt32 => true,
+                CPrimaryType::Int64 => true,
+                CPrimaryType::UInt64 => true,
+                CPrimaryType::Size => true,
+            },
+            Ty::RustType(rust_type) => match rust_type {
+                RustType::CStr => false,
+            },
+            Ty::Platform(_) => false,
+            Ty::Ptr(ty, mutability) => false,
+            Ty::Ref(ty, mutability) => false,
+            Ty::Slice(ty, mutability, array_len) => false,
+            Ty::Array(ty, array_len) => {
+
+                let has_valid_length = match array_len {
+                    ArrayLen::Constant(constant_name) => {
+                        let val = &items.constants[constant_name].value;
+                        match &val[0] {
+                            CExprItem::NumericLiteral(val) => val.parse::<usize>().is_ok(),
+                            CExprItem::U32ArgVar(val) => val.parse::<usize>().is_ok(),
+                            _ => false,
+                        }
+                    },
+                    ArrayLen::Literal(_) => true,
+                };
+
+                ty.bytemuck_is_zeroable(items) && has_valid_length
+            },
+        }
+    } 
 }

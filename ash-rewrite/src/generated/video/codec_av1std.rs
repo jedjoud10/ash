@@ -2,6 +2,7 @@
 #![cfg_attr(rustfmt, rustfmt_skip)]
 //!Items provided by `vulkan_video_codec_av1std`
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct AV1ColorConfigFlags {
     /**- `mono_chrome` @ `0..1`
@@ -99,6 +100,7 @@ impl AV1ColorConfig {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct AV1TimingInfoFlags {
     ///- `equal_picture_interval` @ `0..1`
@@ -141,6 +143,7 @@ impl AV1TimingInfo {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct AV1SequenceHeaderFlags {
     /**- `still_picture` @ `0..1`
@@ -382,6 +385,7 @@ impl<'a> AV1SequenceHeader<'a> {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct AV1LoopFilterFlags {
     /**- `loop_filter_delta_enabled` @ `0..1`
@@ -466,6 +470,7 @@ impl AV1LoopFilter {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct AV1QuantizationFlags {
     /**- `using_qmatrix` @ `0..1`
@@ -573,6 +578,7 @@ impl AV1Segmentation {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct AV1TileInfoFlags {
     ///- `uniform_tile_spacing_flag` @ `0..1`
@@ -796,6 +802,7 @@ impl AV1GlobalMotion {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct AV1FilmGrainFlags {
     /**- `chroma_scaling_from_luma` @ `0..1`

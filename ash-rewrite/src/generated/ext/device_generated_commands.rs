@@ -991,6 +991,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct IndirectCommandsVertexBufferTokenEXT {
         pub vertex_binding_unit: u32,

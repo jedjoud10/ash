@@ -2,6 +2,7 @@
 #![cfg_attr(rustfmt, rustfmt_skip)]
 //!Items provided by `vulkan_video_codec_av1std_encode`
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeAV1ExtensionHeader {
     pub temporal_id: u8,
@@ -18,6 +19,7 @@ impl EncodeAV1ExtensionHeader {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeAV1DecoderModelInfo {
     pub buffer_delay_length_minus_1: u8,
@@ -61,6 +63,7 @@ impl EncodeAV1DecoderModelInfo {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeAV1OperatingPointInfoFlags {
     /**- `decoder_model_present_for_this_op` @ `0..1`
@@ -137,6 +140,7 @@ impl EncodeAV1OperatingPointInfo {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeAV1PictureInfoFlags {
     /**- `error_resilient_mode` @ `0..1`
@@ -534,6 +538,7 @@ impl<'a> EncodeAV1PictureInfo<'a> {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct EncodeAV1ReferenceInfoFlags {
     /**- `disable_frame_end_update_cdf` @ `0..1`

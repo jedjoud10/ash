@@ -2,6 +2,7 @@
 #![cfg_attr(rustfmt, rustfmt_skip)]
 //!Items provided by `vulkan_video_codec_vp9std`
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct VP9ColorConfigFlags {
     ///- `color_range` @ `0..1`
@@ -51,6 +52,7 @@ impl VP9ColorConfig {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct VP9LoopFilterFlags {
     /**- `loop_filter_delta_enabled` @ `0..1`
@@ -132,6 +134,7 @@ impl VP9LoopFilter {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct VP9SegmentationFlags {
     /**- `segmentation_update_map` @ `0..1`

@@ -2,6 +2,7 @@
 #![cfg_attr(rustfmt, rustfmt_skip)]
 //!Items provided by `vulkan_video_codec_h264std`
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct H264SpsVuiFlags {
     /**- `aspect_ratio_info_present_flag` @ `0..1`
@@ -302,6 +303,7 @@ impl<'a> H264SequenceParameterSetVui<'a> {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct H264SpsFlags {
     /**- `constraint_set0_flag` @ `0..1`
@@ -636,6 +638,7 @@ impl<'a> H264SequenceParameterSet<'a> {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct H264PpsFlags {
     /**- `transform_8x8_mode_flag` @ `0..1`

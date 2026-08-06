@@ -2301,6 +2301,7 @@ pub(crate) mod reexport {
     }
     impl<'a> BaseInStructure<'a> {}
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct Offset2D {
         pub x: i32,
@@ -2317,6 +2318,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct Offset3D {
         pub x: i32,
@@ -2338,6 +2340,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct Extent2D {
         pub width: u32,
@@ -2354,6 +2357,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct Extent3D {
         pub width: u32,
@@ -2375,6 +2379,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct Viewport {
         pub x: core::ffi::c_float,
@@ -4721,6 +4726,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct SpecializationMapEntry {
         pub constant_id: u32,
@@ -6344,6 +6350,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct ClearDepthStencilValue {
         pub depth: core::ffi::c_float,
@@ -8169,6 +8176,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct DrawIndirectCommand {
         pub vertex_count: u32,
@@ -8195,6 +8203,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct DrawIndexedIndirectCommand {
         pub index_count: u32,
@@ -8226,6 +8235,7 @@ pub(crate) mod reexport {
         }
     }
     #[repr(C)]
+    #[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
     #[derive(Clone, Copy, Default)]
     pub struct DispatchIndirectCommand {
         pub x: u32,

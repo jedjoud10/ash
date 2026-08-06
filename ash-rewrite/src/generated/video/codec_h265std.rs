@@ -2,6 +2,7 @@
 #![cfg_attr(rustfmt, rustfmt_skip)]
 //!Items provided by `vulkan_video_codec_h265std`
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct H265ProfileTierLevelFlags {
     /**- `general_tier_flag` @ `0..1`
@@ -179,6 +180,7 @@ impl H265SubLayerHrdParameters {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct H265HrdFlags {
     /**- `nal_hrd_parameters_present_flag` @ `0..1`
@@ -380,6 +382,7 @@ impl<'a> H265HrdParameters<'a> {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct H265VpsFlags {
     /**- `vps_temporal_id_nesting_flag` @ `0..1`
@@ -582,6 +585,7 @@ impl H265ScalingLists {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct H265ShortTermRefPicSetFlags {
     /**- `inter_ref_pic_set_prediction_flag` @ `0..1`
@@ -738,6 +742,7 @@ impl H265LongTermRefPicsSps {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct H265SpsVuiFlags {
     /**- `aspect_ratio_info_present_flag` @ `0..1`
@@ -1088,6 +1093,7 @@ impl H265PredictorPaletteEntries {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct H265SpsFlags {
     /**- `sps_temporal_id_nesting_flag` @ `0..1`
@@ -1632,6 +1638,7 @@ impl<'a> H265SequenceParameterSet<'a> {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct H265PpsFlags {
     /**- `dependent_slice_segments_enabled_flag` @ `0..1`

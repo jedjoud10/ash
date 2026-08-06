@@ -662,6 +662,7 @@ impl<'a> VideoEncodeH264RateControlInfoKHR<'a> {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct VideoEncodeH264QpKHR {
     pub qp_i: i32,
@@ -683,6 +684,7 @@ impl VideoEncodeH264QpKHR {
     }
 }
 #[repr(C)]
+#[cfg_attr(feature = "bytemuck", derive(bytemuck::Pod, bytemuck::Zeroable))]
 #[derive(Clone, Copy, Default)]
 pub struct VideoEncodeH264FrameSizeKHR {
     pub frame_i_size: u32,
