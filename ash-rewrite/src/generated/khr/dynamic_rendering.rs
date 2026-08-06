@@ -94,7 +94,7 @@ pub(crate) mod reexport {
         pub const PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR: Self = Self::PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES;
         pub const COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR: Self = Self::COMMAND_BUFFER_INHERITANCE_RENDERING_INFO;
     }
-    pub type RenderingFlagsKHR = crate::vk::RenderingFlags;
+    pub type RenderingFlagBitsKHR = crate::vk::RenderingFlagBits;
     ///Provided by [`khr::dynamic_rendering`](crate::khr::dynamic_rendering)
     impl crate::vk::RenderingFlagBits {
         pub const CONTENTS_SECONDARY_COMMAND_BUFFERS_KHR: Self = Self::CONTENTS_SECONDARY_COMMAND_BUFFERS;

@@ -21,7 +21,7 @@ impl crate::amd::shader_info::Device {
             self.handle,
             pipeline,
             shader_stage,
-            vk::ShaderInfoTypeAMD::STATISTICS,
+            vk::ShaderInfoTypeAMD::STATISTICS_AMDS,
             &mut size,
             info.as_mut_ptr().cast(),
         )

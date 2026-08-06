@@ -24,7 +24,7 @@ impl InstanceFn {
                     _: *mut crate::vk::ShaderInstrumentationMetricDescriptionARM<'_>,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM"
+                        "unable to load vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM",
                     )
                 }
                 let val = _f(

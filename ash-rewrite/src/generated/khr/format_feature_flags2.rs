@@ -6,7 +6,7 @@ pub type FormatProperties3KHR<'a> = crate::vk::FormatProperties3<'a>;
 impl crate::vk::StructureType {
     pub const FORMAT_PROPERTIES_3_KHR: Self = Self::FORMAT_PROPERTIES_3;
 }
-pub type FormatFeatureFlags2KHR = crate::vk::FormatFeatureFlags2;
+pub type FormatFeatureFlagBits2KHR = crate::vk::FormatFeatureFlagBits2;
 ///Provided by [`khr::format_feature_flags2`](crate::khr::format_feature_flags2)
 impl crate::vk::FormatFeatureFlagBits2 {
     pub const SAMPLED_IMAGE_KHR: Self = Self::SAMPLED_IMAGE;

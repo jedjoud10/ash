@@ -26,7 +26,7 @@ impl InstanceFn {
                     _: *mut crate::vk::PerformanceCounterDescriptionARM<'_>,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM"
+                        "unable to load vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM",
                     )
                 }
                 let val = _f(

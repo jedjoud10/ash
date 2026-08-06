@@ -126,7 +126,7 @@ pub(crate) mod reexport {
         pub const PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV: Self = Self::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_EXT;
         pub const PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV: Self = Self::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_EXT;
     }
-    pub type MemoryDecompressionMethodFlagsNV = crate::vk::MemoryDecompressionMethodFlagsEXT;
+    pub type MemoryDecompressionMethodFlagBitsNV = crate::vk::MemoryDecompressionMethodFlagBitsEXT;
     pub type MemoryDecompressionMethodFlagsNV = crate::vk::MemoryDecompressionMethodFlagsEXT;
     pub type PFN_vkCmdDecompressMemoryNV = unsafe extern "system" fn(
         command_buffer: crate::vk::CommandBuffer,

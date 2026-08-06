@@ -41,7 +41,7 @@ impl InstanceFn {
                     _: *mut crate::platform_types::wl_display,
                 ) -> crate::vk::Bool32 {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceWaylandPresentationSupportKHR"
+                        "unable to load vkGetPhysicalDeviceWaylandPresentationSupportKHR",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceWaylandPresentationSupportKHR");

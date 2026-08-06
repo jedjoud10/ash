@@ -24,7 +24,7 @@ impl InstanceFn {
                     _: *mut crate::vk::CooperativeVectorPropertiesNV<'_>,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceCooperativeVectorPropertiesNV"
+                        "unable to load vkGetPhysicalDeviceCooperativeVectorPropertiesNV",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceCooperativeVectorPropertiesNV");

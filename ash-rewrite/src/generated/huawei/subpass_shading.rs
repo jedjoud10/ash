@@ -25,7 +25,7 @@ impl DeviceFn {
                     _: *mut crate::vk::Extent2D,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI"
+                        "unable to load vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI",
                     )
                 }
                 let val = _f(c"vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI");

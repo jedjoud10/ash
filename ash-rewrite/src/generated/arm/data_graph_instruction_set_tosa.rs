@@ -25,7 +25,7 @@ impl InstanceFn {
                     _: *mut crate::vk::BaseOutStructure<'_>,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM"
+                        "unable to load vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM",
                     )
                 }
                 let val = _f(

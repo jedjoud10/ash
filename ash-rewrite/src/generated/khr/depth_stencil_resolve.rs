@@ -12,7 +12,7 @@ impl crate::vk::StructureType {
     pub const PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR: Self = Self::PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES;
     pub const SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE_KHR: Self = Self::SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE;
 }
-pub type ResolveModeFlagsKHR = crate::vk::ResolveModeFlags;
+pub type ResolveModeFlagBitsKHR = crate::vk::ResolveModeFlagBits;
 ///Provided by [`khr::depth_stencil_resolve`](crate::khr::depth_stencil_resolve)
 impl crate::vk::ResolveModeFlagBits {
     pub const NONE_KHR: Self = Self::NONE;

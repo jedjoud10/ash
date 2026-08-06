@@ -169,7 +169,7 @@ impl DeviceFn {
                     _: *mut core::ffi::c_void,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetTensorViewOpaqueCaptureDescriptorDataARM"
+                        "unable to load vkGetTensorViewOpaqueCaptureDescriptorDataARM",
                     )
                 }
                 let val = _f(c"vkGetTensorViewOpaqueCaptureDescriptorDataARM");
@@ -227,7 +227,7 @@ impl InstanceFn {
                     _: *mut crate::vk::ExternalTensorPropertiesARM<'_>,
                 ) {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceExternalTensorPropertiesARM"
+                        "unable to load vkGetPhysicalDeviceExternalTensorPropertiesARM",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceExternalTensorPropertiesARM");

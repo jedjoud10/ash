@@ -166,9 +166,9 @@ pub(crate) mod reexport {
         pub const COMMAND_BUFFER_SUBMIT_INFO_KHR: Self = Self::COMMAND_BUFFER_SUBMIT_INFO;
         pub const PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR: Self = Self::PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES;
     }
-    pub type AccessFlags2KHR = crate::vk::AccessFlags2;
-    pub type PipelineStageFlags2KHR = crate::vk::PipelineStageFlags2;
-    pub type SubmitFlagsKHR = crate::vk::SubmitFlags;
+    pub type AccessFlagBits2KHR = crate::vk::AccessFlagBits2;
+    pub type PipelineStageFlagBits2KHR = crate::vk::PipelineStageFlagBits2;
+    pub type SubmitFlagBitsKHR = crate::vk::SubmitFlagBits;
     ///Provided by [`khr::synchronization2`](crate::khr::synchronization2)
     impl crate::vk::AccessFlagBits {
         pub const NONE_KHR: Self = Self::NONE;

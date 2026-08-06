@@ -1,6 +1,6 @@
 use crate::{
     Context,
-    output::{CodeMap, Destination},
+    output::{CodeMap, Destination, SingleDestination},
 };
 use analysis::{
     decl::Ty,
@@ -9,7 +9,7 @@ use analysis::{
     name::{CommandName, TypeName},
     to_rust::RustTranslator,
 };
-use heck::ToSnekCase;
+use heck::{ToSnekCase, ToUpperCamelCase};
 use indexmap::IndexMap;
 use proc_macro2::{Literal, TokenStream};
 use quote::{format_ident, quote};
@@ -44,7 +44,7 @@ impl FunctionType {
         }
     }
 
-    fn table_name(self, dest: Destination) -> Ident {
+    fn table_name(self, dest: SingleDestination) -> Ident {
         match (self, dest.location) {
             (FunctionType::Static, ..) => format_ident!("StaticFn"),
             (FunctionType::Entry, RequireLocation::Core { major, minor }) => {
@@ -66,7 +66,7 @@ impl FunctionType {
         }
     }
 
-    fn loader_name(self, dest: Destination) -> Ident {
+    fn loader_name(self, dest: SingleDestination) -> Ident {
         match (self, dest.location) {
             (FunctionType::Static, ..) => format_ident!("Static"),
             (FunctionType::Entry, RequireLocation::Core { major, minor }) => {
@@ -89,8 +89,6 @@ impl FunctionType {
     }
 }
 
-// TODO: some device level fns don't seem to be generated (and thus their loaders). ex: device_group, pipeline_properties, image_compression_control
-// unsure if this is a problem from xml parsing or what
 pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
     debug!("generating loader code");
 
@@ -98,9 +96,10 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
     struct Table {
         fields: TokenStream,
         loaders: TokenStream,
+        trait_impls: TokenStream
     }
 
-    let mut tables: IndexMap<(FunctionType, Destination), Table> = Default::default();
+    let mut tables: IndexMap<(FunctionType, SingleDestination), Table> = Default::default();
     for command_item in ctx.items.commands.values() {
         let (name, required_by, command) = match command_item {
             CommandItem::Alias(alias) => match &ctx.items.commands[&alias.alias] {
@@ -110,49 +109,87 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
             CommandItem::Command(command) => (command.name, command.required_by, command),
         };
 
-        let function_type = FunctionType::of_command(command);
         let mut dest = Destination::new(required_by);
         dest.reexport = false;
-        let table = tables.entry((function_type, dest)).or_default();
+        
+        for single_destination in dest.single_dests() {
+            let function_type = FunctionType::of_command(command);
+            let table = tables.entry((function_type, single_destination)).or_default();
 
-        let field_name = format_ident!("{}", name.prefix_trimmed().to_snek_case());
-        let command_ty = ctx.command_to_rust(name, true);
-        table.fields.extend(quote! {
-            pub #field_name: #command_ty,
-        });
 
-        let panic_msg = format!("unable to load {}", name.original());
-        let cstr = Literal::c_string(&CString::new(name.original()).unwrap());
+            let field_name = format_ident!("{}", name.prefix_trimmed().to_snek_case());
+            
+            // TODO: definitely not the place for this but I did not want to modify RustTranslator and Context for this
+            // idk where to put this instead....
+            let command_name_ident: Ident = syn::parse_str(&format!("PFN_{}", name.original())).unwrap();
 
-        let params = command.params.iter().map(|param| {
-            let ty = param.decl.ty.to_rust(ctx, &Lifetime::placeholder());
-            quote! { _: #ty }
-        });
+            let command_ty = ctx.command_to_rust(name, true);
+            table.fields.extend(quote! {
+                pub #field_name: #command_ty,
+            });
 
-        let ret = command.return_type.as_ref().map(|ty| {
-            let rust_ty = ty.to_rust(ctx, &Lifetime::placeholder());
-            quote! { -> #rust_ty }
-        });
+            let panic_msg = format!("unable to load {}", name.original());
+            let cstr = Literal::c_string(&CString::new(name.original()).unwrap());
 
-        table.loaders.extend(quote! {
-            #field_name: unsafe {
-                unsafe extern "system" fn #field_name( #( #params ),* ) #ret {
-                    panic!(#panic_msg)
+            let params = command.params.iter().map(|param| {
+                let ty = param.decl.ty.to_rust(ctx, &Lifetime::placeholder());
+                quote! { _: #ty }
+            });
+
+            let ret = command.return_type.as_ref().map(|ty| {
+                let rust_ty = ty.to_rust(ctx, &Lifetime::placeholder());
+                quote! { -> #rust_ty }
+            });
+
+            table.loaders.extend(quote! {
+                #field_name: unsafe {
+                    unsafe extern "system" fn #field_name( #( #params ),* ) #ret {
+                        panic!(#panic_msg)
+                    }
+
+                    let val = _f(#cstr);
+                    if val.is_null() {
+                        #field_name
+                    } else {
+                        ::core::mem::transmute(val)
+                    }
+                },
+            });
+
+            for param in command.params.iter() {
+                if !param.struct_impls_traits.is_empty() {
+                    let param_ident = crate::trim_p_pps(&param.decl.name.original().to_snek_case());
+
+
+                    let param_trait_name = format_ident!(
+                        "{}Param{}",
+                        name.prefix_trimmed(),
+                        param_ident.to_upper_camel_case(),
+                    );
+
+                    let doc_string = format!(
+                        "Implemented for all types that can be passed as argument to `{}` in [`{}`]",
+                        param_ident, command_name_ident
+                    );
+
+                    table.trait_impls.extend(quote! {
+                        #[doc = #doc_string]
+                        unsafe trait #param_trait_name {}
+                    });
+                
+                    for struct_type_to_impl in param.struct_impls_traits.iter() {
+                        let ty = struct_type_to_impl.to_rust(ctx, &Lifetime::placeholder());
+                        table.trait_impls.extend(quote! {
+                            unsafe impl #param_trait_name for #ty {}
+                        });
+                    }
                 }
-
-                let val = _f(#cstr);
-                if val.is_null() {
-                    #field_name
-                } else {
-                    ::core::mem::transmute(val)
-                }
-            },
-        });
+            }            
+        }
     }
 
-    for (&(function_type, dest), Table { fields, loaders }) in tables.iter() {
+    for ((function_type, dest), Table { fields, loaders, trait_impls }) in tables.into_iter() {
         let table_name = function_type.table_name(dest);
-        let loader_name = function_type.loader_name(dest);
 
         let mut code = quote! {
             #[derive(Clone)]
@@ -173,6 +210,9 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
                 }
             }
         };
+        
+        let loader_name = function_type.loader_name(dest);
+
 
         match function_type {
             FunctionType::Instance => {
@@ -238,6 +278,9 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
             _ => {}
         };
 
+        code.extend(trait_impls);
+        
         codemap.extend(CodeMap::new(dest, code));
+        
     }
 }

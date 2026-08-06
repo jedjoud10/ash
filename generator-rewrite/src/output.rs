@@ -3,7 +3,7 @@ mod vfs;
 use crate::output::vfs::VirtualRustFs;
 use analysis::{
     LibraryName,
-    item::{RequireLocation, RequiredBy},
+    item::{MultiRequireLocation, RequireLocation, RequiredBy},
 };
 use heck::ToSnekCase;
 use indexmap::{IndexMap, IndexSet};
@@ -17,10 +17,11 @@ use std::{
 };
 use syn::Ident;
 
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct Destination {
     pub library: LibraryName,
-    pub location: RequireLocation,
+    pub locations: MultiRequireLocation,
     pub reexport: bool,
 }
 
@@ -28,12 +29,36 @@ impl Destination {
     pub fn new(required_by: RequiredBy) -> Destination {
         Destination {
             library: required_by.library,
-            // TODO: figure out secondary locations
-            // we need to be generating type aliases or smth like that at those...
-            location: required_by.primary_location(),
+            locations: required_by.locations,
             reexport: true,
         }
     }
+
+    pub fn single_dests(&self) -> Vec<SingleDestination> {
+        self.locations.iter().map(|location| {
+            SingleDestination {
+                library: self.library,
+                location: location.clone(),
+                reexport: self.reexport // TODO: figure out re-export based on "primary location"
+            }
+        }).collect::<Vec<_>>()
+    }
+
+    pub fn guess_primary(&self) -> SingleDestination {
+        // TODO: figure out which is the "primary" location that defined, either from analysis or xml
+        // it might not always be the very first index (for example, image_compression_control PFN_vkGetImageSubresourceLayout2 is defined *later* in vk.xml compared to the duplicate fn from host_image_copy, which comes earlier)
+        // just because host_image_copy came earlier does NOT mean that it is the primary location. must look at the "required by / extends" chain or something like dat.
+        let primary_location = self.locations[0];
+
+        SingleDestination { library: self.library, location: primary_location, reexport: self.reexport }
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub struct SingleDestination {
+    pub library: LibraryName,
+    pub location: RequireLocation,
+    pub reexport: bool,
 }
 
 struct DestinationPathComponent {
@@ -41,7 +66,7 @@ struct DestinationPathComponent {
     doc_comment: String,
 }
 
-impl Destination {
+impl SingleDestination {
     fn path_components(&self) -> Vec<DestinationPathComponent> {
         match self.location {
             RequireLocation::Core { major, minor } => vec![DestinationPathComponent {
@@ -92,13 +117,17 @@ impl Destination {
 }
 
 #[derive(Default)]
-pub struct CodeMap(IndexMap<Destination, TokenStream>);
+pub struct CodeMap(IndexMap<SingleDestination, TokenStream>);
 
 impl CodeMap {
-    pub fn new(dest: Destination, tokens: TokenStream) -> Self {
+    pub fn new(dest: SingleDestination, tokens: TokenStream) -> Self {
         let mut map = IndexMap::with_capacity(1);
         map.insert(dest, tokens);
         CodeMap(map)
+    }
+
+    pub fn new_from_primary(dest: Destination, tokens: TokenStream) -> Self {
+        Self::new(dest.guess_primary(), tokens)
     }
 
     pub fn extend(&mut self, other: Self) {
@@ -107,7 +136,7 @@ impl CodeMap {
         }
     }
 
-    pub fn iter(&self) -> impl Iterator<Item = (&Destination, &TokenStream)> {
+    pub fn iter(&self) -> impl Iterator<Item = (&SingleDestination, &TokenStream)> {
         self.0.iter()
     }
 
@@ -127,7 +156,7 @@ impl CodeMap {
         }
 
         struct SourceFile {
-            destination: Destination,
+            destination: SingleDestination,
             doc_comment: String,
             reexport_content: TokenStream,
             content: TokenStream,

@@ -17,6 +17,7 @@ mod generated;
 /// Type definitions for platform-specific external types
 pub mod platform_types;
 pub use platform_types::*;
+pub use platform_types::*;
 
 use alloc::vec::Vec;
 use core::{mem, ptr};

@@ -42,7 +42,7 @@ impl InstanceFn {
                     _: *mut crate::vk::DisplayPlaneProperties2KHR<'_>,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceDisplayPlaneProperties2KHR"
+                        "unable to load vkGetPhysicalDeviceDisplayPlaneProperties2KHR",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceDisplayPlaneProperties2KHR");

@@ -29,7 +29,7 @@ impl InstanceFn {
                     _: *mut crate::vk::ExternalImageFormatPropertiesNV,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceExternalImageFormatPropertiesNV"
+                        "unable to load vkGetPhysicalDeviceExternalImageFormatPropertiesNV",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceExternalImageFormatPropertiesNV");

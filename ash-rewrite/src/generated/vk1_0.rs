@@ -279,7 +279,7 @@ impl InstanceFnV1_0 {
                     _: *mut crate::vk::SparseImageFormatProperties,
                 ) {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceSparseImageFormatProperties"
+                        "unable to load vkGetPhysicalDeviceSparseImageFormatProperties",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceSparseImageFormatProperties");

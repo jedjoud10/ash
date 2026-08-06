@@ -193,7 +193,7 @@ impl Code for Struct {
             }
         };
 
-        CodeMap::new(Destination::new(self.required_by), code)
+        CodeMap::new_from_primary(Destination::new(self.required_by), code)
     }
 }
 
@@ -204,7 +204,7 @@ fn decl_setter_and_getter(
     lifetime: &Lifetime,
 ) -> TokenStream {
     let field_name = ctx.var_name_to_rust(decl.name);
-    let trimmed_field_name = ctx.trimmed_var_name_to_rust(decl.name);   
+    let trimmed_field_name = ctx.trimmed_var_name_to_rust(decl.name); 
 
     match decl.ty {
         Ty::SpecType(TypeName::VK_BOOL32) => {
@@ -373,6 +373,6 @@ impl Code for Union {
             }
         };
 
-        CodeMap::new(Destination::new(self.required_by), code)
+        CodeMap::new_from_primary(Destination::new(self.required_by), code)
     }
 }

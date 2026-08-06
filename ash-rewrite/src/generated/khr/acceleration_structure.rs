@@ -144,7 +144,7 @@ impl DeviceFn {
                     _: u32,
                 ) {
                     panic!(
-                        "unable to load vkCmdWriteAccelerationStructuresPropertiesKHR"
+                        "unable to load vkCmdWriteAccelerationStructuresPropertiesKHR",
                     )
                 }
                 let val = _f(c"vkCmdWriteAccelerationStructuresPropertiesKHR");
@@ -180,7 +180,7 @@ impl DeviceFn {
                     _: *mut crate::vk::AccelerationStructureCompatibilityKHR,
                 ) {
                     panic!(
-                        "unable to load vkGetDeviceAccelerationStructureCompatibilityKHR"
+                        "unable to load vkGetDeviceAccelerationStructureCompatibilityKHR",
                     )
                 }
                 let val = _f(c"vkGetDeviceAccelerationStructureCompatibilityKHR");

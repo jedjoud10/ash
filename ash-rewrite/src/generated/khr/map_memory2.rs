@@ -76,7 +76,7 @@ pub(crate) mod reexport {
         pub const MEMORY_MAP_INFO_KHR: Self = Self::MEMORY_MAP_INFO;
         pub const MEMORY_UNMAP_INFO_KHR: Self = Self::MEMORY_UNMAP_INFO;
     }
-    pub type MemoryUnmapFlagsKHR = crate::vk::MemoryUnmapFlags;
+    pub type MemoryUnmapFlagBitsKHR = crate::vk::MemoryUnmapFlagBits;
     pub type MemoryUnmapFlagsKHR = crate::vk::MemoryUnmapFlags;
     pub type PFN_vkMapMemory2KHR = crate::vk::PFN_vkMapMemory2;
     pub type PFN_vkUnmapMemory2KHR = crate::vk::PFN_vkUnmapMemory2;

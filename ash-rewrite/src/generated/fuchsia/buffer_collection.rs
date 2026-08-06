@@ -44,7 +44,7 @@ impl DeviceFn {
                     _: *const crate::vk::BufferConstraintsInfoFUCHSIA<'_>,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkSetBufferCollectionBufferConstraintsFUCHSIA"
+                        "unable to load vkSetBufferCollectionBufferConstraintsFUCHSIA",
                     )
                 }
                 let val = _f(c"vkSetBufferCollectionBufferConstraintsFUCHSIA");

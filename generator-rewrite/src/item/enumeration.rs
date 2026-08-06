@@ -25,9 +25,12 @@ impl Code for Enum {
             pub struct #name(pub(crate) i32);
         };
 
-        let mut codemap = CodeMap::new(Destination::new(self.required_by), code);
+        let guessed_primary = Destination::new(self.required_by).guess_primary();
+        let mut codemap = CodeMap::new(guessed_primary, code);
+
+
         let mut impl_map = CodeMap::new(
-            Destination::new(self.required_by),
+            guessed_primary,
             quote! {
                 #[inline]
                 pub const fn from_raw(x: i32) -> Self {
@@ -58,7 +61,7 @@ impl Code for Enum {
                 }
             };
 
-            impl_map.extend(CodeMap::new(
+            impl_map.extend(CodeMap::new_from_primary(
                 Destination::new(*required_by),
                 quote! { pub const #name: Self = #value; },
             ));
@@ -67,7 +70,7 @@ impl Code for Enum {
         for (&dest, impl_tokens) in impl_map.iter() {
             let name = ctx.type_to_rust(
                 self.name,
-                dest != Destination::new(self.required_by),
+                dest != guessed_primary,
                 &Lifetime::placeholder(),
             );
 

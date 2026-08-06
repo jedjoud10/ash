@@ -42,7 +42,7 @@ impl InstanceFn {
                     _: crate::platform_types::VisualID,
                 ) -> crate::vk::Bool32 {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceXlibPresentationSupportKHR"
+                        "unable to load vkGetPhysicalDeviceXlibPresentationSupportKHR",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceXlibPresentationSupportKHR");

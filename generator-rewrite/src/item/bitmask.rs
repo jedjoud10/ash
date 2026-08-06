@@ -17,7 +17,7 @@ impl Code for BitMask {
     #[instrument(skip(ctx))]
     fn code(&self, ctx: &Context) -> CodeMap {
         trace!("generating");
-        let name = ctx.type_to_rust2(self.name(), false, &Lifetime::placeholder());
+        let name = ctx.type_to_rust_without_bit_flags_replacement(self.name(), false, &Lifetime::placeholder());
         let base_ty = match self.bitwidth {
             BitWidth::Bits32 => quote! { u32 },
             BitWidth::Bits64 => quote! { u64 },
@@ -26,7 +26,7 @@ impl Code for BitMask {
         let mut bits_code = TokenStream::default();
         let mut values = TokenStream::default();
         if let Some(bits_name) = self.bits_name {
-            let bits_name_tokens = ctx.type_to_rust2(bits_name, false, &Lifetime::placeholder());
+            let bits_name_tokens = ctx.type_to_rust_without_bit_flags_replacement(bits_name, false, &Lifetime::placeholder());
 
             bits_code = quote! {
                 #[repr(transparent)]
@@ -134,7 +134,8 @@ impl Code for BitMask {
             #bits_code
         };
 
-        let mut codemap = CodeMap::new(Destination::new(self.required_by), code);
+        let guessed_primary = Destination::new(self.required_by).guess_primary();
+        let mut codemap = CodeMap::new(guessed_primary, code);
 
         if let Some(bits_name) = self.bits_name {
             let mut impl_map = CodeMap::default();
@@ -157,15 +158,15 @@ impl Code for BitMask {
                 };
 
                 impl_map.extend(CodeMap::new(
-                    Destination::new(*required_by),
+                    Destination::new(*required_by).guess_primary(),
                     quote! { pub const #name: Self = #value; },
                 ));
             }
 
             for (&dest, impl_tokens) in impl_map.iter() {
-                let name = ctx.type_to_rust2(
+                let name = ctx.type_to_rust_without_bit_flags_replacement(
                     bits_name,
-                    dest != Destination::new(self.required_by),
+                    dest != guessed_primary,
                     &Lifetime::placeholder(),
                 );
 

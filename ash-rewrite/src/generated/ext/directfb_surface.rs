@@ -41,7 +41,7 @@ impl InstanceFn {
                     _: *mut crate::platform_types::IDirectFB,
                 ) -> crate::vk::Bool32 {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceDirectFBPresentationSupportEXT"
+                        "unable to load vkGetPhysicalDeviceDirectFBPresentationSupportEXT",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceDirectFBPresentationSupportEXT");

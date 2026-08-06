@@ -71,7 +71,7 @@ impl DeviceFn {
                     _: *mut core::ffi::c_void,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetRayTracingCaptureReplayShaderGroupHandlesKHR"
+                        "unable to load vkGetRayTracingCaptureReplayShaderGroupHandlesKHR",
                     )
                 }
                 let val = _f(c"vkGetRayTracingCaptureReplayShaderGroupHandlesKHR");

@@ -118,7 +118,7 @@ impl InstanceFn {
                     _: *mut crate::vk::SparseImageFormatProperties2<'_>,
                 ) {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceSparseImageFormatProperties2KHR"
+                        "unable to load vkGetPhysicalDeviceSparseImageFormatProperties2KHR",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceSparseImageFormatProperties2KHR");

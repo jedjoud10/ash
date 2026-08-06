@@ -41,7 +41,7 @@ impl InstanceFn {
                     _: *mut crate::platform_types::_screen_window,
                 ) -> crate::vk::Bool32 {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceScreenPresentationSupportQNX"
+                        "unable to load vkGetPhysicalDeviceScreenPresentationSupportQNX",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceScreenPresentationSupportQNX");

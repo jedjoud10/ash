@@ -72,7 +72,7 @@ impl DeviceFn {
                     >,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetDataGraphPipelineSessionBindPointRequirementsARM"
+                        "unable to load vkGetDataGraphPipelineSessionBindPointRequirementsARM",
                     )
                 }
                 let val = _f(c"vkGetDataGraphPipelineSessionBindPointRequirementsARM");
@@ -91,7 +91,7 @@ impl DeviceFn {
                     _: *mut crate::vk::MemoryRequirements2<'_>,
                 ) {
                     panic!(
-                        "unable to load vkGetDataGraphPipelineSessionMemoryRequirementsARM"
+                        "unable to load vkGetDataGraphPipelineSessionMemoryRequirementsARM",
                     )
                 }
                 let val = _f(c"vkGetDataGraphPipelineSessionMemoryRequirementsARM");
@@ -228,7 +228,7 @@ impl InstanceFn {
                     _: *mut crate::vk::QueueFamilyDataGraphPropertiesARM<'_>,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM"
+                        "unable to load vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM");
@@ -249,7 +249,7 @@ impl InstanceFn {
                     >,
                 ) {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM"
+                        "unable to load vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM",
                     )
                 }
                 let val = _f(

@@ -42,7 +42,7 @@ impl DeviceFn {
                     _: *const crate::vk::BindDescriptorBufferEmbeddedSamplersInfoEXT<'_>,
                 ) {
                     panic!(
-                        "unable to load vkCmdBindDescriptorBufferEmbeddedSamplers2EXT"
+                        "unable to load vkCmdBindDescriptorBufferEmbeddedSamplers2EXT",
                     )
                 }
                 let val = _f(c"vkCmdBindDescriptorBufferEmbeddedSamplers2EXT");

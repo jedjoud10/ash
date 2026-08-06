@@ -24,7 +24,7 @@ impl InstanceFn {
                     _: *mut crate::vk::TimeDomainKHR,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceCalibrateableTimeDomainsEXT"
+                        "unable to load vkGetPhysicalDeviceCalibrateableTimeDomainsEXT",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceCalibrateableTimeDomainsEXT");

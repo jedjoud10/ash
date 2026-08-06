@@ -40,7 +40,7 @@ impl InstanceFn {
                     _: u32,
                 ) -> crate::vk::Bool32 {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceWin32PresentationSupportKHR"
+                        "unable to load vkGetPhysicalDeviceWin32PresentationSupportKHR",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceWin32PresentationSupportKHR");

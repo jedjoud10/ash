@@ -27,7 +27,7 @@ impl InstanceFn {
                     _: *mut crate::vk::PerformanceCounterDescriptionKHR<'_>,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR"
+                        "unable to load vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR",
                     )
                 }
                 let val = _f(
@@ -46,7 +46,7 @@ impl InstanceFn {
                     _: *mut u32,
                 ) {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR"
+                        "unable to load vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR");

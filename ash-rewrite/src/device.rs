@@ -2110,7 +2110,7 @@ impl Device {
     pub unsafe fn cmd_write_timestamp(
         &self,
         command_buffer: vk::CommandBuffer,
-        pipeline_stage: vk::PipelineStageFlagBits,
+        pipeline_stage: vk::PipelineStageFlags, // what?
         query_pool: vk::QueryPool,
         query: u32,
     ) {

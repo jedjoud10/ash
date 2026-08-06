@@ -154,7 +154,7 @@ impl InstanceFnV1_1 {
                     _: *mut crate::vk::SparseImageFormatProperties2<'_>,
                 ) {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceSparseImageFormatProperties2"
+                        "unable to load vkGetPhysicalDeviceSparseImageFormatProperties2",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceSparseImageFormatProperties2");
@@ -186,7 +186,7 @@ impl InstanceFnV1_1 {
                     _: *mut crate::vk::ExternalSemaphoreProperties<'_>,
                 ) {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceExternalSemaphoreProperties"
+                        "unable to load vkGetPhysicalDeviceExternalSemaphoreProperties",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceExternalSemaphoreProperties");

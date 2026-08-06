@@ -24,7 +24,7 @@ impl InstanceFn {
                     _: *mut crate::vk::FramebufferMixedSamplesCombinationNV<'_>,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV"
+                        "unable to load vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV",
                     )
                 }
                 let val = _f(

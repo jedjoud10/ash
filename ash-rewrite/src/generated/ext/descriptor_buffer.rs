@@ -193,7 +193,7 @@ impl DeviceFn {
                     _: *mut core::ffi::c_void,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT"
+                        "unable to load vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT",
                     )
                 }
                 let val = _f(

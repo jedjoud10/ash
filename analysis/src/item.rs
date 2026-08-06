@@ -32,6 +32,8 @@ use std::{
 use tinyvec::{ArrayVec, array_vec};
 use tracing::debug;
 
+pub type MultiRequireLocation = ArrayVec<[RequireLocation; 4]>;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct RequiredBy {
     pub library: LibraryName,

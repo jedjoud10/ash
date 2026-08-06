@@ -712,6 +712,7 @@ pub struct CommandParam {
     pub len: Option<&'static str>,
     pub altlen: Option<&'static str>,
     pub optional: Vec<&'static str>,
+    pub struct_impls_traits: Vec<TypeName>,
 }
 
 impl CommandParam {
@@ -721,6 +722,11 @@ impl CommandParam {
             len: attribute(node, "len"),
             altlen: attribute(node, "altlen"),
             optional: attribute_comma_separated(node, "optional"),
+            struct_impls_traits: attribute_comma_separated(node, "validstructs")
+                .into_iter()
+                .map(|x|
+                    TypeName::new(x)
+                ).collect::<Vec<TypeName>>()
         }
     }
 }

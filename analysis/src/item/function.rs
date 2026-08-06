@@ -41,6 +41,7 @@ impl FuncPointer {
 #[derive(Debug)]
 pub struct CommandParam {
     pub decl: Decl,
+    pub struct_impls_traits: Vec<Ty>,
 }
 
 #[derive(Debug)]
@@ -69,6 +70,7 @@ impl Command {
             params: (xml.params.iter())
                 .map(|param| CommandParam {
                     decl: Decl::from_c(require_map, &param.c_decl),
+                    struct_impls_traits: param.struct_impls_traits.iter().map(|x| Ty::SpecType(*x)).collect::<Vec<_>>()
                 })
                 .collect(),
             return_type: (xml.return_type.as_ref())

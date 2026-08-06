@@ -27,7 +27,7 @@ impl DeviceFn {
                     _: *mut crate::vk::AccelerationStructureBuildSizesInfoKHR<'_>,
                 ) {
                     panic!(
-                        "unable to load vkGetPartitionedAccelerationStructuresBuildSizesNV"
+                        "unable to load vkGetPartitionedAccelerationStructuresBuildSizesNV",
                     )
                 }
                 let val = _f(c"vkGetPartitionedAccelerationStructuresBuildSizesNV");
@@ -43,7 +43,7 @@ impl DeviceFn {
                     _: *const crate::vk::BuildPartitionedAccelerationStructureInfoNV<'_>,
                 ) {
                     panic!(
-                        "unable to load vkCmdBuildPartitionedAccelerationStructuresNV"
+                        "unable to load vkCmdBuildPartitionedAccelerationStructuresNV",
                     )
                 }
                 let val = _f(c"vkCmdBuildPartitionedAccelerationStructuresNV");

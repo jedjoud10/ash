@@ -24,7 +24,7 @@ impl InstanceFn {
                     _: *mut crate::vk::ExternalBufferProperties<'_>,
                 ) {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceExternalBufferPropertiesKHR"
+                        "unable to load vkGetPhysicalDeviceExternalBufferPropertiesKHR",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceExternalBufferPropertiesKHR");
@@ -82,8 +82,8 @@ pub(crate) mod reexport {
         pub const EXTERNAL_BUFFER_PROPERTIES_KHR: Self = Self::EXTERNAL_BUFFER_PROPERTIES;
         pub const PHYSICAL_DEVICE_ID_PROPERTIES_KHR: Self = Self::PHYSICAL_DEVICE_ID_PROPERTIES;
     }
-    pub type ExternalMemoryHandleTypeFlagsKHR = crate::vk::ExternalMemoryHandleTypeFlags;
-    pub type ExternalMemoryFeatureFlagsKHR = crate::vk::ExternalMemoryFeatureFlags;
+    pub type ExternalMemoryHandleTypeFlagBitsKHR = crate::vk::ExternalMemoryHandleTypeFlagBits;
+    pub type ExternalMemoryFeatureFlagBitsKHR = crate::vk::ExternalMemoryFeatureFlagBits;
     ///Provided by [`khr::external_memory_capabilities`](crate::khr::external_memory_capabilities)
     impl crate::vk::ExternalMemoryHandleTypeFlagBits {
         pub const OPAQUE_FD_KHR: Self = Self::OPAQUE_FD;

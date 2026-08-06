@@ -9,7 +9,7 @@ pub type PipelineCreationFeedbackCreateInfoEXT<'a> = crate::vk::PipelineCreation
 impl crate::vk::StructureType {
     pub const PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT: Self = Self::PIPELINE_CREATION_FEEDBACK_CREATE_INFO;
 }
-pub type PipelineCreationFeedbackFlagsEXT = crate::vk::PipelineCreationFeedbackFlags;
+pub type PipelineCreationFeedbackFlagBitsEXT = crate::vk::PipelineCreationFeedbackFlagBits;
 ///Provided by [`ext::pipeline_creation_feedback`](crate::ext::pipeline_creation_feedback)
 impl crate::vk::PipelineCreationFeedbackFlagBits {
     pub const VALID_EXT: Self = Self::VALID;

@@ -26,7 +26,7 @@ impl InstanceFn {
                     _: *mut crate::vk::VideoEncodeQualityLevelPropertiesKHR<'_>,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR"
+                        "unable to load vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR");

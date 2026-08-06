@@ -153,7 +153,7 @@ pub(crate) mod reexport {
         pub const SUBRESOURCE_HOST_MEMCPY_SIZE_EXT: Self = Self::SUBRESOURCE_HOST_MEMCPY_SIZE;
         pub const HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY_EXT: Self = Self::HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY;
     }
-    pub type HostImageCopyFlagsEXT = crate::vk::HostImageCopyFlags;
+    pub type HostImageCopyFlagBitsEXT = crate::vk::HostImageCopyFlagBits;
     ///Provided by [`ext::host_image_copy`](crate::ext::host_image_copy)
     impl crate::vk::ImageUsageFlagBits {
         pub const HOST_TRANSFER_EXT: Self = Self::HOST_TRANSFER;

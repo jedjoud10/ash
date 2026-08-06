@@ -116,7 +116,7 @@ pub(crate) mod reexport {
         pub const TIMELINE_KHR: Self = Self::TIMELINE;
     }
     pub type SemaphoreTypeKHR = crate::vk::SemaphoreType;
-    pub type SemaphoreWaitFlagsKHR = crate::vk::SemaphoreWaitFlags;
+    pub type SemaphoreWaitFlagBitsKHR = crate::vk::SemaphoreWaitFlagBits;
     ///Provided by [`khr::timeline_semaphore`](crate::khr::timeline_semaphore)
     impl crate::vk::SemaphoreWaitFlagBits {
         pub const ANY_KHR: Self = Self::ANY;

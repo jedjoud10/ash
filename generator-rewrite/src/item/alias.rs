@@ -16,14 +16,14 @@ impl Code for TypeAlias {
     fn code(&self, ctx: &Context) -> CodeMap {
         trace!("generating");
         let lifetime = Lifetime(format_ident!("a"));
-        let name = ctx.type_to_rust(self.name(), false, &lifetime);
-        let alias = ctx.type_to_rust(self.alias, true, &lifetime);
+        let name = ctx.type_to_rust_without_bit_flags_replacement(self.name(), false, &lifetime);
+        let alias = ctx.type_to_rust_without_bit_flags_replacement(self.alias, true, &lifetime);
 
         let code = quote! {
             pub type #name = #alias;
         };
 
-        CodeMap::new(Destination::new(self.required_by), code)
+        CodeMap::new_from_primary(Destination::new(self.required_by), code)
     }
 }
 
@@ -37,6 +37,6 @@ impl Code for CommandAlias {
             pub type #name = #alias;
         };
 
-        CodeMap::new(Destination::new(self.required_by), code)
+        CodeMap::new_from_primary(Destination::new(self.required_by), code)
     }
 }

@@ -24,7 +24,7 @@ impl InstanceFn {
                     _: *mut crate::vk::ExternalFenceProperties<'_>,
                 ) {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceExternalFencePropertiesKHR"
+                        "unable to load vkGetPhysicalDeviceExternalFencePropertiesKHR",
                     )
                 }
                 let val = _f(c"vkGetPhysicalDeviceExternalFencePropertiesKHR");
@@ -69,8 +69,8 @@ pub(crate) mod reexport {
         pub const PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO_KHR: Self = Self::PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO;
         pub const EXTERNAL_FENCE_PROPERTIES_KHR: Self = Self::EXTERNAL_FENCE_PROPERTIES;
     }
-    pub type ExternalFenceHandleTypeFlagsKHR = crate::vk::ExternalFenceHandleTypeFlags;
-    pub type ExternalFenceFeatureFlagsKHR = crate::vk::ExternalFenceFeatureFlags;
+    pub type ExternalFenceHandleTypeFlagBitsKHR = crate::vk::ExternalFenceHandleTypeFlagBits;
+    pub type ExternalFenceFeatureFlagBitsKHR = crate::vk::ExternalFenceFeatureFlagBits;
     ///Provided by [`khr::external_fence_capabilities`](crate::khr::external_fence_capabilities)
     impl crate::vk::ExternalFenceHandleTypeFlagBits {
         pub const OPAQUE_FD_KHR: Self = Self::OPAQUE_FD;

@@ -92,7 +92,7 @@ impl<'a> RustTranslator for Context<'a> {
 
     // duplicate of type_to_rust but does not have the FlagsBits -> Flags replacement
     // that could have been passed as argument but that would require changing fn signature everywhere  
-    fn type_to_rust2(&self, name: TypeName, qualified: bool, lifetime: &Lifetime) -> TokenStream {
+    fn type_to_rust_without_bit_flags_replacement(&self, name: TypeName, qualified: bool, lifetime: &Lifetime) -> TokenStream {
         let type_item = &self.items.types[&name];
         let required_by = type_item.required_by(&self.items);
         let ident: Ident = syn::parse_str(name.prefix_trimmed(required_by.library)).unwrap();

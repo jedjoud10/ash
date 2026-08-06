@@ -26,7 +26,7 @@ impl InstanceFn {
                     >,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV"
+                        "unable to load vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV",
                     )
                 }
                 let val = _f(

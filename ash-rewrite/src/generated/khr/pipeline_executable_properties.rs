@@ -59,7 +59,7 @@ impl DeviceFn {
                     _: *mut crate::vk::PipelineExecutableInternalRepresentationKHR<'_>,
                 ) -> crate::vk::Result {
                     panic!(
-                        "unable to load vkGetPipelineExecutableInternalRepresentationsKHR"
+                        "unable to load vkGetPipelineExecutableInternalRepresentationsKHR",
                     )
                 }
                 let val = _f(c"vkGetPipelineExecutableInternalRepresentationsKHR");
