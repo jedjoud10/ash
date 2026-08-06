@@ -8,7 +8,7 @@ use core::mem;
 use core::mem::size_of_val; // TODO: Remove when bumping MSRV to 1.80
 
 impl crate::amd::shader_info::Device {
-    /// <https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/vkGetShaderInfoAMD.html> with [`vk::ShaderInfoTypeAMD::STATISTICS`]
+    /// <https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/vkGetShaderInfoAMD.html> with [`vk::ShaderInfoTypeAMD::STATISTICS_AMD`]
     #[inline]
     pub unsafe fn get_shader_info_statistics(
         &self,
@@ -21,7 +21,7 @@ impl crate::amd::shader_info::Device {
             self.handle,
             pipeline,
             shader_stage,
-            vk::ShaderInfoTypeAMD::STATISTICS_AMDS,
+            vk::ShaderInfoTypeAMD::STATISTICS_AMD,
             &mut size,
             info.as_mut_ptr().cast(),
         )
@@ -30,7 +30,7 @@ impl crate::amd::shader_info::Device {
         Ok(info.assume_init())
     }
 
-    /// <https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/vkGetShaderInfoAMD.html> with [`vk::ShaderInfoTypeAMD::BINARY`]
+    /// <https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/vkGetShaderInfoAMD.html> with [`vk::ShaderInfoTypeAMD::BINARY_AMD`]
     #[inline]
     pub unsafe fn get_shader_info_binary(
         &self,
@@ -42,14 +42,14 @@ impl crate::amd::shader_info::Device {
                 self.handle,
                 pipeline,
                 shader_stage,
-                vk::ShaderInfoTypeAMD::BINARY,
+                vk::ShaderInfoTypeAMD::BINARY_AMD,
                 count,
                 data.cast(),
             )
         })
     }
 
-    /// <https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/vkGetShaderInfoAMD.html> with [`vk::ShaderInfoTypeAMD::DISASSEMBLY`]
+    /// <https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/vkGetShaderInfoAMD.html> with [`vk::ShaderInfoTypeAMD::DISASSEMBLY_AMD`]
     #[inline]
     pub unsafe fn get_shader_info_disassembly(
         &self,
@@ -61,7 +61,7 @@ impl crate::amd::shader_info::Device {
                 self.handle,
                 pipeline,
                 shader_stage,
-                vk::ShaderInfoTypeAMD::DISASSEMBLY,
+                vk::ShaderInfoTypeAMD::DISASSEMBLY_AMD,
                 count,
                 data.cast(),
             )

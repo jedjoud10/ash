@@ -58,7 +58,7 @@ impl Device {
     }
 }
 ///Implemented for all types that can be passed as argument to `pipeline_properties` in [`PFN_vkGetPipelinePropertiesEXT`]
-unsafe trait GetPipelinePropertiesEXTParamPipelineProperties {}
+pub unsafe trait GetPipelinePropertiesEXTParamPipelineProperties {}
 unsafe impl GetPipelinePropertiesEXTParamPipelineProperties
 for crate::vk::PipelinePropertiesIdentifierEXT<'_> {}
 pub(crate) mod reexport {

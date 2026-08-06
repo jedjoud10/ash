@@ -174,7 +174,7 @@ pub fn generate_code(ctx: &Context, codemap: &mut CodeMap) {
 
                     table.trait_impls.extend(quote! {
                         #[doc = #doc_string]
-                        unsafe trait #param_trait_name {}
+                        pub unsafe trait #param_trait_name {}
                     });
                 
                     for struct_type_to_impl in param.struct_impls_traits.iter() {
